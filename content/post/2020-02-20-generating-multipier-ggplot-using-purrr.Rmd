@@ -1,0 +1,89 @@
+---
+title: Generating multiple ggplot using Purrr
+author: Edgar Zamora
+date: '2020-02-20'
+slug: generating-multipier-ggplot-using-purrr
+categories: []
+tags:
+  - ggplot
+  - purrr
+  - function
+subtitle: ''
+description: 'Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
+image: ''
+publishdate: "Sys.Date"
+---
+
+At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly had a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+
+For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675). For the rest of this post I will provide some background that will help in solving this problem.
+
+# The problem
+
+The principle problem we would like to solve is figuring out how to turn this repetitive code
+
+```{r the_problem}
+
+```
+
+
+# Background
+
+First things first, lets load all the necessary packages.
+
+```{r packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(patchwork)
+library(blogdown)
+```
+
+```{r plot1}
+plot1 <- mpg %>% 
+  count(cyl, drv) %>% 
+  ggplot(aes(cyl, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = "",
+       x = "Number of Cylinders",
+       y = "Count") +
+  scale_fill_manual(name = "Drive Train",
+                    values = c("grey75", "steelblue", "#13F09F"),
+                    labels = c("4wd", "front-wheel drive", "rear wheel drive")) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = "grey80", size = .15),
+    axis.ticks = element_blank(),
+    legend.position = "bottom"
+  )
+```
+
+
+```{r plot2}
+plot2 <- mpg %>% 
+  count(class, drv) %>% 
+  ggplot(aes(class, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = "",
+       x = "Vehicle Class",
+       y = "Count") +
+  scale_fill_manual(name = "Drive Train",
+                    values = c("grey75", "steelblue", "#13F09F"),
+                    labels = c("4wd", "front-wheel drive", "rear wheel drive")) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = "grey80", size = .15),
+    axis.ticks = element_blank(),
+    legend.position = "bottom"
+  )
+```
+
+
+```{r}
+plot1 / plot2
+```
+
+
+
+
+
+
+

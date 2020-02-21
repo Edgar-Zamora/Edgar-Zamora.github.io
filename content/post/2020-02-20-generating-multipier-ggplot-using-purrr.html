@@ -1,0 +1,65 @@
+---
+title: Generating multiple ggplot using Purrr
+author: Edgar Zamora
+date: '2020-02-20'
+slug: generating-multipier-ggplot-using-purrr
+categories: []
+tags:
+  - ggplot
+  - purrr
+  - function
+subtitle: ''
+description: 'Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
+image: ''
+publishdate: "Sys.Date"
+---
+
+
+
+<p>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly had a similar structure, which is a great benefit of using <code>ggplot</code>. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the <code>purrr</code> package to make the process quicker and more efficient.</p>
+<p>For a quick solution to this question I would encourage you to check out my answer on <a href="https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675">stackoverflow</a>. For the rest of this post I will provide some background that will help in solving this problem.</p>
+<div id="the-problem" class="section level1">
+<h1>The problem</h1>
+<p>The principle problem we would like to solve is figuring out how to turn this repetitive code</p>
+</div>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>First things first, lets load all the necessary packages.</p>
+<pre class="r"><code>library(tidyverse)
+library(patchwork)
+library(blogdown)</code></pre>
+<pre class="r"><code>plot1 &lt;- mpg %&gt;% 
+  count(cyl, drv) %&gt;% 
+  ggplot(aes(cyl, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = &quot;&quot;,
+       x = &quot;Number of Cylinders&quot;,
+       y = &quot;Count&quot;) +
+  scale_fill_manual(name = &quot;Drive Train&quot;,
+                    values = c(&quot;grey75&quot;, &quot;steelblue&quot;, &quot;#13F09F&quot;),
+                    labels = c(&quot;4wd&quot;, &quot;front-wheel drive&quot;, &quot;rear wheel drive&quot;)) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = &quot;grey80&quot;, size = .15),
+    axis.ticks = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )</code></pre>
+<pre class="r"><code>plot2 &lt;- mpg %&gt;% 
+  count(class, drv) %&gt;% 
+  ggplot(aes(class, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = &quot;&quot;,
+       x = &quot;Vehicle Class&quot;,
+       y = &quot;Count&quot;) +
+  scale_fill_manual(name = &quot;Drive Train&quot;,
+                    values = c(&quot;grey75&quot;, &quot;steelblue&quot;, &quot;#13F09F&quot;),
+                    labels = c(&quot;4wd&quot;, &quot;front-wheel drive&quot;, &quot;rear wheel drive&quot;)) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = &quot;grey80&quot;, size = .15),
+    axis.ticks = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )</code></pre>
+<pre class="r"><code>plot1 / plot2</code></pre>
+<p><img src="/post/2020-02-20-generating-multipier-ggplot-using-purrr_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>

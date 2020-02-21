@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Edgar Zamora">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//">
+    <meta property="twitter:image" content="//" />
+    
+
+    
+    <meta name="title" content="Generating multiple ggplot using Purrr" />
+    <meta property="og:title" content="Generating multiple ggplot using Purrr" />
+    <meta property="twitter:title" content="Generating multiple ggplot using Purrr" />
+    
+
+    
+    <meta name="description" content="Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.">
+    <meta property="og:description" content="Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time." />
+    <meta property="twitter:description" content="Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time." />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Generating multiple ggplot using Purrr-</title>
+
+    <link rel="canonical" href="/2020/02/20/generating-multipier-ggplot-using-purrr/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+    
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Edgar Zamora</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="https://twitter.com/Edgar_Zamora">Twitter</a></li>
+                    
+                        <li><a href="https://github.com/Edgar-Zamora">GitHub</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/ggplot" title="ggplot">
+                            ggplot
+                        </a>
+                        
+                        <a class="tag" href="/tags/purrr" title="purrr">
+                            purrr
+                        </a>
+                        
+                        <a class="tag" href="/tags/function" title="function">
+                            function
+                        </a>
+                        
+                    </div>
+                    <h1>Generating multiple ggplot using Purrr</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Edgar Zamora
+                         
+                        on 
+                        Thursday, February 20, 2020
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                
+                
+                
+
+
+<p>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly had a similar structure, which is a great benefit of using <code>ggplot</code>. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the <code>purrr</code> package to make the process quicker and more efficient.</p>
+<p>For a quick solution to this question I would encourage you to check out my answer on <a href="https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675">stackoverflow</a>. For the rest of this post I will provide some background that will help in solving this problem.</p>
+<div id="the-problem" class="section level1">
+<h1>The problem</h1>
+<p>The principle problem we would like to solve is figuring out how to turn this repetitive code</p>
+</div>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>First things first, lets load all the necessary packages.</p>
+<pre class="r"><code>library(tidyverse)
+library(patchwork)
+library(blogdown)</code></pre>
+<pre class="r"><code>plot1 &lt;- mpg %&gt;% 
+  count(cyl, drv) %&gt;% 
+  ggplot(aes(cyl, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = &quot;&quot;,
+       x = &quot;Number of Cylinders&quot;,
+       y = &quot;Count&quot;) +
+  scale_fill_manual(name = &quot;Drive Train&quot;,
+                    values = c(&quot;grey75&quot;, &quot;steelblue&quot;, &quot;#13F09F&quot;),
+                    labels = c(&quot;4wd&quot;, &quot;front-wheel drive&quot;, &quot;rear wheel drive&quot;)) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = &quot;grey80&quot;, size = .15),
+    axis.ticks = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )</code></pre>
+<pre class="r"><code>plot2 &lt;- mpg %&gt;% 
+  count(class, drv) %&gt;% 
+  ggplot(aes(class, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = &quot;&quot;,
+       x = &quot;Vehicle Class&quot;,
+       y = &quot;Count&quot;) +
+  scale_fill_manual(name = &quot;Drive Train&quot;,
+                    values = c(&quot;grey75&quot;, &quot;steelblue&quot;, &quot;#13F09F&quot;),
+                    labels = c(&quot;4wd&quot;, &quot;front-wheel drive&quot;, &quot;rear wheel drive&quot;)) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = &quot;grey80&quot;, size = .15),
+    axis.ticks = element_blank(),
+    legend.position = &quot;bottom&quot;
+  )</code></pre>
+<pre class="r"><code>plot1 / plot2</code></pre>
+<p><img src="/post/2020-02-20-generating-multipier-ggplot-using-purrr_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Edgar Zamora 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

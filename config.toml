@@ -1,0 +1,21 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "Edgar Zamora"
+theme = "hugo-theme-cleanwhite-master"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+  
+[[params.addtional_menus]]
+  title =  "Twitter"
+  href = "https://twitter.com/Edgar_Zamora"
+  
+[[params.addtional_menus]]
+  title =  "GitHub"
+  href = "https://github.com/Edgar-Zamora"
+  
+  
+  

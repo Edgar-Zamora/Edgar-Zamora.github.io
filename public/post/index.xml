@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Edgar Zamora</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Edgar Zamora</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Generating multiple ggplot using Purrr</title>
+      <link>/2020/02/20/generating-multipier-ggplot-using-purrr/</link>
+      <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/02/20/generating-multipier-ggplot-using-purrr/</guid>
+      <description>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly had a similar structure, which is a great benefit of using ggplot. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code.</description>
+    </item>
+    
+  </channel>
+</rss>
