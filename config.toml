@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 title = "Edgar Zamora"
 theme = "hugo-theme-cleanwhite-master"
-googleAnalytics = ""
+googleAnalytics = "UA-159054948-1"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
