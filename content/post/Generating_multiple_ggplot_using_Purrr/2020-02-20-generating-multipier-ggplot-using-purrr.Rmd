@@ -1,0 +1,158 @@
+---
+title: Generating multiple ggplot using Purrr
+author: Edgar Zamora
+date: '2020-02-20'
+slug: generating-multipier-ggplot-using-purrr
+categories: []
+tags:
+  - ggplot
+  - purrr
+  - function
+subtitle: ''
+description: 'Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
+image: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80'
+publishdate: "Sys.Date"
+---
+
+At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly had a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+
+For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675). For the rest of this post I will provide some background that will help in solving this problem.
+
+First things first, lets load all the necessary packages. 
+
+```{r packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(patchwork)
+library(blogdown)
+library(knitr)
+```
+
+# The problem
+
+The principle problem we would like to solve is figuring out how to turn repetitive code into efficient code. To best explain how we will do this, we must begin with code that this repetitive. Below you will see code for two different plots that look very similar but differ in what variables are used for the calculations, the fill aesthetic, and the labeling on the x-axis. Other than those three aspects the visualizations are the same.
+
+```{r plot1}
+plot1 <- mpg %>% 
+  count(cyl, drv) %>% 
+  ggplot(aes(cyl, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = "",
+       x = "Number of Cylinders",
+       y = "Count") +
+  scale_fill_manual(name = "Drive Train",
+                    values = c("grey75", "steelblue", "#13F09F"),
+                    labels = c("4wd", "front-wheel drive", "rear wheel drive")) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = "grey80", size = .15),
+    axis.ticks = element_blank(),
+    legend.position = "bottom"
+  )
+```
+
+```{r plot2}
+plot2 <- mpg %>% 
+  count(class, drv) %>% 
+  ggplot(aes(class, n, fill = drv)) +
+  geom_col(position = position_dodge()) +
+  labs(title = "",
+       x = "Vehicle Class",
+       y = "Count") +
+  scale_fill_manual(name = "Drive Train",
+                    values = c("grey75", "steelblue", "#13F09F"),
+                    labels = c("4wd", "front-wheel drive", "rear wheel drive")) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(colour = "grey80", size = .15),
+    axis.ticks = element_blank(),
+    legend.position = "bottom"
+  )
+```
+
+
+```{r echo = FALSE, combined_plots}
+plot1 / plot2
+```
+
+## Why a function?
+
+There are a myraid of reasons for turning repetivie graphics into a function, but here are mine:
+
+1. I am lazy and do not want to spend time copying and pasting code from one section to another in a single document. Also would rather spend more time with my CATS!!!
+
+2. Having one single function will allow one to debug issues quickier. Instead of having to look through multiple different code snippets, you can focus on one.
+
+3. Similar to solving issues quicker, one can also increase their workflow and productively. Gone are those days were graphics are a large part of document. 
+
+4. When creating functions for graphics you can spend less time on the building of the graphic and more time on customizing it to fit your needs.
+
+
+# Lets put the fun in (fun)ction 
+
+If you take a look at the code for both graphics from above, you can spot three differeces:
+
+1. The first variable in the `count()` function is different, in that one is "cyl" and the other is "class". 
+
+2. The variable in the ggplot aesthetic also varys in the the same way that the `count()` function did. 
+3. The x-axis labels are differenent in that one references the "Number of Cylinders" while the other references "Vehicle Class".
+
+Knowing that these are the only differences among both graphics, we can instruct the function to change according to those arguements. **Note** for this to work you should have the lastest `rlang' version installed. 
+
+```{r ggplotfunction}
+repetitive_ggplot <- function(variable){
+  mpg %>% 
+    count({{variable}}, drv) %>% 
+    ggplot(aes({{variable}}, n, fill = drv)) +
+    geom_col(position = position_dodge()) + 
+    labs(title = "",
+         x = "",
+         y = "Count") +
+    scale_fill_manual(name = "Drive Train",
+                      values = c("grey75", "steelblue", "#13F09F"),
+                      labels = c("4wd", "front-wheel drive", "rear wheel drive")) +
+    theme(
+      panel.background = element_blank(),
+      panel.grid.major = element_line(colour = "grey80", size = .15),
+      axis.ticks = element_blank(),
+      legend.position = "bottom"
+      )
+}
+```
+
+Having created our function, we can than feed our variables through the arguments of the function to produce our plots as seen below
+
+```{r}
+fun_plot1 <- repetitive_ggplot(cyl)
+
+fun_plot2 <- repetitive_ggplot(class)
+
+fun_plot1/fun_plot2
+
+```
+
+THERE YOU ARE!!!! We have created a function that avoids repeating code for similar ggplots. Now you may have noticed that we dont include the axis titles. To do that you need to add the `labs` function after the function as so.
+
+```{r}
+fun_plot1 <- repetitive_ggplot(cyl) +
+  labs(x = "Number of Cylinders")
+
+fun_plot2 <- repetitive_ggplot(class) +
+  labs(x = "Vehicle Class")
+
+```
+
+Doing this only overrides the specific argument within the commend. Inside we define the y-axis title as "Count" which if you printed the plot would still be perserved. The only overwritten aspects are thsoe defined within, which in this case was the x-axis label. 
+
+# Making it Purrr
+
+As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specfically we will using `map`.
+
+```{r}
+variables <- c("cyl", "class")
+
+map(variables, repetitive_ggplot)
+```
+
+For more specific about the `purrr` package and its various functions I encourage you to check out the `purrr` documentation [page](https://purrr.tidyverse.org) or the R [cheat sheets](https://rstudio.com/resources/cheatsheets/).
+
+
