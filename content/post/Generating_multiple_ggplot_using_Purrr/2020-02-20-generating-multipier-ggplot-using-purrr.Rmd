@@ -148,9 +148,8 @@ Doing this only overrides the specific argument within the commend. Inside we de
 As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specfically we will using `map`.
 
 ```{r}
-variables <- c("cyl", "class")
 
-map(variables, repetitive_ggplot)
+  
 ```
 
 For more specific about the `purrr` package and its various functions I encourage you to check out the `purrr` documentation [page](https://purrr.tidyverse.org) or the R [cheat sheets](https://rstudio.com/resources/cheatsheets/).
