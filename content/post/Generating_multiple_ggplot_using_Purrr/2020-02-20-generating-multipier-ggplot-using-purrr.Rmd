@@ -14,7 +14,7 @@ image: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.
 publishdate: "Sys.Date"
 ---
 
-At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly had a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
 
 For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675). For the rest of this post I will provide some background that will help in solving this problem.
 
@@ -86,12 +86,14 @@ There are a myraid of reasons for turning repetivie graphics into a function, bu
 
 4. When creating functions for graphics you can spend less time on the building of the graphic and more time on customizing it to fit your needs.
 
+For additoinal reason for writing a function over copying and pasting, check out [Chapter 19](https://r4ds.had.co.nz/functions.html) in R for Data Science by Grolemund and Wickham (2017). 
+
 
 # Lets put the fun in (fun)ction 
 
 If you take a look at the code for both graphics from above, you can spot three differeces:
 
-1. The first variable in the `count()` function is different, in that one is "cyl" and the other is "class". 
+1. The first variable in the `count()` function is different, in that one variable is "cyl" and the other is "class". 
 
 2. The variable in the ggplot aesthetic also varys in the the same way that the `count()` function did. 
 3. The x-axis labels are differenent in that one references the "Number of Cylinders" while the other references "Vehicle Class".
@@ -130,7 +132,7 @@ fun_plot1/fun_plot2
 
 ```
 
-THERE YOU ARE!!!! We have created a function that avoids repeating code for similar ggplots. Now you may have noticed that we dont include the axis titles. To do that you need to add the `labs` function after the function as so.
+THERE YOU ARE!!!! We created a function that avoids repeating code for similar ggplots. Now you may have noticed that we dont include the axis titles. To do that you need to add the `labs` function after the function as so.
 
 ```{r}
 fun_plot1 <- repetitive_ggplot(cyl) +
@@ -148,7 +150,6 @@ Doing this only overrides the specific argument within the commend. Inside we de
 As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specfically we will using `map`.
 
 ```{r}
-
   
 ```
 
