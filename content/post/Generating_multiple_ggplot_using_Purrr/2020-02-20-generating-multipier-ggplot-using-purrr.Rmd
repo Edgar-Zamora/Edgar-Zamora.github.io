@@ -1,5 +1,5 @@
 ---
-title: Generating multiple ggplot using Purrr
+title: Generating multiple ggplot plots using purrr
 author: Edgar Zamora
 date: '2020-02-20'
 slug: generating-multipier-ggplot-using-purrr
@@ -9,14 +9,19 @@ tags:
   - purrr
   - function
 subtitle: ''
-description: 'Ask is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
+description: 'It is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
 image: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80'
 publishdate: "Sys.Date"
+showtoc: false
 ---
 
+<<<<<<< HEAD
 At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+=======
+At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. What I would traditionally do is reuse code from one visualization to another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+>>>>>>> a8e519ae83dca68ec56579b0707f6f63d6a77f5f
 
-For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675). For the rest of this post I will provide some background that will help in solving this problem.
+For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675).
 
 First things first, lets load all the necessary packages. 
 
@@ -76,11 +81,11 @@ plot1 / plot2
 
 ## Why a function?
 
-There are a myraid of reasons for turning repetivie graphics into a function, but here are mine:
+There are a myriad of reasons for turning repetitive graphics into a function, but here are mine:
 
-1. I am lazy and do not want to spend time copying and pasting code from one section to another in a single document. Also would rather spend more time with my CATS!!!
+1. I am lazy and do not want to spend time copying and pasting code from one section to another in a single document. Also I would rather spend more time with my CATS!!!
 
-2. Having one single function will allow one to debug issues quickier. Instead of having to look through multiple different code snippets, you can focus on one.
+2. Having a single function will allow you to debug issues quicker. Instead of having to look through multiple different code snippets, you can focus on one.
 
 3. Similar to solving issues quicker, one can also increase their workflow and productively. Gone are those days were graphics are a large part of document. 
 
@@ -91,14 +96,14 @@ For additoinal reason for writing a function over copying and pasting, check out
 
 # Lets put the fun in (fun)ction 
 
-If you take a look at the code for both graphics from above, you can spot three differeces:
+If you take a look at the code for both graphics from above, you can spot three differences:
 
 1. The first variable in the `count()` function is different, in that one variable is "cyl" and the other is "class". 
 
-2. The variable in the ggplot aesthetic also varys in the the same way that the `count()` function did. 
-3. The x-axis labels are differenent in that one references the "Number of Cylinders" while the other references "Vehicle Class".
+2. The variable in the ggplot aesthetic also varies in the same way that the `count()` function did. 
+3. The x-axis labels are different in that one references the "Number of Cylinders" while the other references "Vehicle Class".
 
-Knowing that these are the only differences among both graphics, we can instruct the function to change according to those arguements. **Note** for this to work you should have the lastest `rlang' version installed. 
+Knowing that these are the only differences among both graphics, we can instruct the function to change according to those arguments. **Note** for this to work you should have the latest `rlang' version installed. 
 
 ```{r ggplotfunction}
 repetitive_ggplot <- function(variable){
@@ -128,11 +133,15 @@ fun_plot1 <- repetitive_ggplot(cyl)
 
 fun_plot2 <- repetitive_ggplot(class)
 
-fun_plot1/fun_plot2
+fun_plot1/fun_plot2 #patchwork to create stacked plots
 
 ```
 
+<<<<<<< HEAD
 THERE YOU ARE!!!! We created a function that avoids repeating code for similar ggplots. Now you may have noticed that we dont include the axis titles. To do that you need to add the `labs` function after the function as so.
+=======
+THERE YOU ARE!!!! We have created a function that avoids repeating code for similar ggplots. Now you may have noticed that we did not include the axis titles. To do that you need to add the `labs` function after the function as so.
+>>>>>>> a8e519ae83dca68ec56579b0707f6f63d6a77f5f
 
 ```{r}
 fun_plot1 <- repetitive_ggplot(cyl) +
@@ -143,11 +152,11 @@ fun_plot2 <- repetitive_ggplot(class) +
 
 ```
 
-Doing this only overrides the specific argument within the commend. Inside we define the y-axis title as "Count" which if you printed the plot would still be perserved. The only overwritten aspects are thsoe defined within, which in this case was the x-axis label. 
+Doing this only overrides the specific argument within the command. Inside we define the y-axis title as "Count" which if you printed the plot would still be preserved. The only overwritten aspects are those defined within, which in this case was the x-axis label. 
 
 # Making it Purrr
 
-As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specfically we will using `map`.
+As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specifically we will be using `map`.
 
 ```{r}
   
@@ -155,4 +164,7 @@ As indicated by the title of this post, we are also going to use the `purrr` pac
 
 For more specific about the `purrr` package and its various functions I encourage you to check out the `purrr` documentation [page](https://purrr.tidyverse.org) or the R [cheat sheets](https://rstudio.com/resources/cheatsheets/).
 
+# Conclusion
+
+By following this guide you can start to turn some of your repetive code into code that is cleaner, quicker and more efficient. In no way is this the end, rather it is the start to increasing productivety in ones workflow. There are few things that you should remember before embarking in creating a function for your multiple plots. It is important to rember that there needs to be some variation within each visualization but not so much that you can not create a function. There is no magic number I can prescribe but once you starting working you will notice trends. 
 
