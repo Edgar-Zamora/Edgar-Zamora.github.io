@@ -15,7 +15,11 @@ publishdate: "Sys.Date"
 showtoc: false
 ---
 
+<<<<<<< HEAD
+At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+=======
 At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. What I would traditionally do is reuse code from one visualization to another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
+>>>>>>> a8e519ae83dca68ec56579b0707f6f63d6a77f5f
 
 For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675).
 
@@ -87,12 +91,14 @@ There are a myriad of reasons for turning repetitive graphics into a function, b
 
 4. When creating functions for graphics you can spend less time on the building of the graphic and more time on customizing it to fit your needs.
 
+For additoinal reason for writing a function over copying and pasting, check out [Chapter 19](https://r4ds.had.co.nz/functions.html) in R for Data Science by Grolemund and Wickham (2017). 
+
 
 # Lets put the fun in (fun)ction 
 
 If you take a look at the code for both graphics from above, you can spot three differences:
 
-1. The first variable in the `count()` function is different, in that one is "cyl" and the other is "class". 
+1. The first variable in the `count()` function is different, in that one variable is "cyl" and the other is "class". 
 
 2. The variable in the ggplot aesthetic also varies in the same way that the `count()` function did. 
 3. The x-axis labels are different in that one references the "Number of Cylinders" while the other references "Vehicle Class".
@@ -131,7 +137,11 @@ fun_plot1/fun_plot2 #patchwork to create stacked plots
 
 ```
 
+<<<<<<< HEAD
+THERE YOU ARE!!!! We created a function that avoids repeating code for similar ggplots. Now you may have noticed that we dont include the axis titles. To do that you need to add the `labs` function after the function as so.
+=======
 THERE YOU ARE!!!! We have created a function that avoids repeating code for similar ggplots. Now you may have noticed that we did not include the axis titles. To do that you need to add the `labs` function after the function as so.
+>>>>>>> a8e519ae83dca68ec56579b0707f6f63d6a77f5f
 
 ```{r}
 fun_plot1 <- repetitive_ggplot(cyl) +
@@ -149,6 +159,7 @@ Doing this only overrides the specific argument within the command. Inside we de
 As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specifically we will be using `map`.
 
 ```{r}
+<<<<<<< HEAD
 variables <- mpg %>% 
   select(class, cyl) %>% 
   names()
@@ -159,6 +170,9 @@ xxx <- function(x){
 
 map(variables, xxx)
 
+=======
+  
+>>>>>>> cfedb22cf3501c30629f979f19b2fb9d2d930f6c
 ```
 
 For more specific about the `purrr` package and its various functions I encourage you to check out the `purrr` documentation [page](https://purrr.tidyverse.org) or the R [cheat sheets](https://rstudio.com/resources/cheatsheets/).
