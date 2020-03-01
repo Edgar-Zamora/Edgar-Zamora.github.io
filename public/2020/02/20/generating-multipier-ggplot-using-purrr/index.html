@@ -313,9 +313,15 @@ fun_plot2 &lt;- repetitive_ggplot(class) +
 <div id="making-it-purrr" class="section level1">
 <h1>Making it Purrr</h1>
 <p>As indicated by the title of this post, we are also going to use the <code>purrr</code> package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the <code>map</code> functions from the <code>purrr</code> package, specifically we will be using <code>map</code>.</p>
-<pre class="r"><code>variables &lt;- c(&quot;cyl&quot;, &quot;class&quot;)
+<pre class="r"><code>variables &lt;- mpg %&gt;% 
+  select(class, cyl) %&gt;% 
+  names()
 
-map(variables, repetitive_ggplot)</code></pre>
+xxx &lt;- function(x){
+  repetitive_ggplot({{x}})
+}
+
+map(variables, xxx)</code></pre>
 <pre><code>## [[1]]</code></pre>
 <p><img src="/post/Generating_multiple_ggplot_using_Purrr/2020-02-20-generating-multipier-ggplot-using-purrr_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre><code>## 
