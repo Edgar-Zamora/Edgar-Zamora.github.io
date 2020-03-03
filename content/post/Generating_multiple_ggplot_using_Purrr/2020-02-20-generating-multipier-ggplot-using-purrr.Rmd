@@ -159,7 +159,20 @@ Doing this only overrides the specific argument within the command. Inside we de
 As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specifically we will be using `map`.
 
 ```{r}
+<<<<<<< HEAD
+variables <- mpg %>% 
+  select(class, cyl) %>% 
+  names()
+
+xxx <- function(x){
+  repetitive_ggplot({{x}})
+}
+
+map(variables, xxx)
+
+=======
   
+>>>>>>> cfedb22cf3501c30629f979f19b2fb9d2d930f6c
 ```
 
 For more specific about the `purrr` package and its various functions I encourage you to check out the `purrr` documentation [page](https://purrr.tidyverse.org) or the R [cheat sheets](https://rstudio.com/resources/cheatsheets/).
