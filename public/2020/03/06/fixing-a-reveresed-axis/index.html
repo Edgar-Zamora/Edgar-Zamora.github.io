@@ -15,15 +15,15 @@
     
 
     
-    <meta name="title" content="About" />
-    <meta property="og:title" content="About" />
-    <meta property="twitter:title" content="About" />
+    <meta name="title" content="Fixing a reveresed axis" />
+    <meta property="og:title" content="Fixing a reveresed axis" />
+    <meta property="twitter:title" content="Fixing a reveresed axis" />
     
 
     
-    <meta name="description" content="">
-    <meta property="og:description" content="" />
-    <meta property="twitter:description" content="" />
+    <meta name="description" content="Here goes my descripition of the article.">
+    <meta property="og:description" content="Here goes my descripition of the article." />
+    <meta property="twitter:description" content="Here goes my descripition of the article." />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>About-</title>
+    <title>Fixing a reveresed axis-</title>
 
-    <link rel="canonical" href="/about/">
+    <link rel="canonical" href="/2020/03/06/fixing-a-reveresed-axis/">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 	
@@ -155,7 +155,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://images.unsplash.com/photo-1540745291638-2c71059043e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')
+        background-image: url('https://images.unsplash.com/photo-1509205477838-a534e43a849f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=498&q=80')
     }
 </style>
 <header class="intro-header">
@@ -165,16 +165,24 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/ggplot" title="ggplot">
+                            ggplot
+                        </a>
+                        
+                        <a class="tag" href="/tags/forecats" title="forecats">
+                            forecats
+                        </a>
+                        
                     </div>
-                    <h1>About</h1>
+                    <h1>Fixing a reveresed axis</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
                         
-                                Edgar Zamora
+                            Edgar Zamora
                          
                         on 
-                        Thursday, May 5, 2016
+                        Friday, March 6, 2020
                         
                         
                         
@@ -199,18 +207,58 @@
                 post-container">
 
                 
-                <header>
-                    <h2>TOC</h2>
-                </header>
-                <nav id="TableOfContents"></nav>
                 
-                <p>This is a &ldquo;hello world&rdquo; example website for the <a href="https://github.com/rstudio/blogdown"><strong>blogdown</strong></a> package. The theme was forked from <a href="https://github.com/jrutheiser/hugo-lithium-theme">@jrutheiser/hugo-lithium-theme</a> and modified by <a href="https://github.com/yihui/hugo-lithium">Yihui Xie</a>.</p>
+
+
+<pre class="r"><code>library(tidyverse)
+library(blogdown)</code></pre>
+<p>Data comes from week 13 of #TidyTuesday.</p>
+<pre class="r"><code>seattle_pets &lt;- read_csv(
+  &quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-26/seattle_pets.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   license_issue_date = col_character(),
+##   license_number = col_character(),
+##   animals_name = col_character(),
+##   species = col_character(),
+##   primary_breed = col_character(),
+##   secondary_breed = col_character(),
+##   zip_code = col_character()
+## )</code></pre>
+<pre class="r"><code>seattle_pets %&gt;% 
+  filter(!species %in% c(&quot;Goat&quot;, &quot;Pig&quot;)) %&gt;% 
+  count(species, animals_name) %&gt;% 
+  group_by(species) %&gt;% 
+  top_n(10) %&gt;% 
+  mutate(animals_name = replace_na(animals_name, &quot;Unkown&quot;)) %&gt;% 
+  ggplot(aes(animals_name, n)) + 
+  geom_col() +
+  labs(
+    title = &quot;Top 10 animal names among Cats and Dogs&quot;,
+    y = &quot;&quot;,
+    x = &quot;Name of Animal&quot;
+  ) +
+  coord_flip() +
+  facet_grid(~species) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major.x = element_line(colour = &quot;grey70&quot;, size = .2),
+    panel.grid.major.y = element_blank(),
+    axis.ticks = element_blank()
+  )</code></pre>
+<pre><code>## Selecting by n</code></pre>
+<p><img src="/post/2020-03-06-fixing-a-reversed-axis-label_files/figure-html/data-1.png" width="672" /></p>
 
 
                 
 
                 <hr>
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/02/20/generating-multipier-ggplot-using-purrr/" data-toggle="tooltip" data-placement="top" title="Generating multiple ggplot plots using purrr">&larr;
+                            Previous Post</a>
+                    </li>
                     
                     
                 </ul>
