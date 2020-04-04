@@ -1,0 +1,304 @@
+---
+title: "The Complete Theme Guide"
+author: "Edgar Zamora"
+date: '2020-04-02'
+slug: complete-theme-guide
+categories: []
+tags:
+- theme
+- ggplot
+subtitle: ''
+description: ''
+image: https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80
+publishdate: Sys.Date
+showtoc: no
+draft: true
+---
+[]: # 'Photo by: Robert Katzki (@ro_ka)'
+
+In creating visualizations, one aims not only to create a visualization that can convey the message behind the data but also to create a visualization that is appealing to the viewer. The `theme` function in ggplot allows for one to do so, but whenever I look at the reference page I sometimes become over whelmed by the number of components. For that reason, this post will focus on detailing non-data components of ones plot.
+
+Let me say that the components below are not exhaustive, there may and probably are other components that have been created by the R community. These will not be covered in this post because of possibility of never being able to cover them all. Also I will not be covering complete themes like `theme_bw()`, `theme_minimal()`, or others because they already have predetermined components. If you would like to learn more about complete themes you can go to the [reference page](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+
+
+The primary package we will be working today is `ggplot2`, will load the metapackge `tidyverse` because of other pakcages that may come into play.
+
+```{r setup ,results='hide', message=FALSE, warning=FALSE}
+library(tidyverse)
+library(patchwork)
+library(cowplot)
+
+knitr::opts_chunk$set(fig.align = 'center')
+```
+
+# Components
+
+When looking at the [reference page](https://ggplot2.tidyverse.org/reference/theme.html) for the `theme` function, there a total of 92 (if my counting was correct) arguments that can be used to customize a plot!! Though some are used more often than not, I thought it would be beneficial to myself and others to document what each individual argument does in respects to customizing a plot.
+
+There are a few things to know when using the theme arguments.
+
+1. All arguments need to reference some kind of element. There are six elements.
+  - `element_line()`: using this element will change anything that is considered a line within the plot
+  - `element_rect()`: changes rectangular aspects (borders and backgrounds) of plots
+  - `element_text()`: changes all text of a plot
+  - `element_blank()`: makes the specified element disappear/leaves it blank
+  - `element_render()`: not quite sure, but will update when I figure it out
+  - `element_grob()`: generates a grid grob from the theme
+  
+2. Arguments within the theme function should follow a general ordering. 
+  - `plot.backgroud = element_rect()`
+  - `axis.text = element_text()`
+  - `legend.position = elemen_blank()`
+  - and many others.
+  
+Knowing these two aspects when using the `theme()` function will making modifying components of a plot quick and easy. Within each `element_*` there are additional aruegments like `size`, `colour`, `linetype` and more that will be need to pass the particular edits you would like to make to the plot. You can find a complete list of available arguments in the theme elements [reference page](https://ggplot2.tidyverse.org/reference/element.html). 
+
+To keep things consistent with the reference page for the `theme` function I will be using the same plot they have and build off that to detail all the customizations available. The dataset used to create the graphic is from the `mtcars` package which should be automatically installed when if you have the most current version of R and RStudio. 
+
+```{r}
+base_plot <- ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  labs(title = "Fuel economy declines as weight increases",
+       subtitle = "This will serve as our base plot",
+       caption = "@Edgar_Zamora_ | ggplot2")
+
+base_plot
+```
+
+## <span style = "color:#FFA500; font-size:50px">Plot</span>
+
+### Background
+
+```{r}
+base_plot +
+  theme(plot.background = element_rect(fill = "steelblue", linetype = "dashed", colour = "yellow", size = 2))
+```
+
+### Title
+
+```{r}
+base_plot +
+  theme(plot.title = element_text(size = 25, face = "plain", colour = "purple", family = "Helvetica LT Ultra Compressed"))
+```
+
+### Title position
+
+```{r}
+
+```
+
+
+### Subtitle
+
+```{r}
+base_plot +
+  theme(plot.subtitle = element_text(size = 15, face = "bold.italic", colour = "red"))
+```
+
+### Capition
+
+```{r}
+base_plot +
+  theme(plot.caption = element_text(size = 5, angle = 20, colour = "#DB7D11"))
+```
+
+### Caption position
+
+```{r}
+
+```
+
+### Tag
+
+```{r}
+
+```
+
+### Tag position
+
+```{r}
+
+```
+
+### Margin
+
+There are number of different units you can use to move the margins. These are some of the most popular ones
+
+1. Centimeters (**"cm"**)
+2. Inches (**"in"**)
+3. Millimeters (**"mm**)
+4. Points (**"pt"**)
+
+A complete list of possible units and their conversions can be found by going to the `unit()` function [reference page](https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/unit).
+
+```{r}
+base_plot +
+  theme(plot.margin = margin(t = 3, r = 5, b = 0, l = 0, unit = "cm")) 
+```
+
+
+## <span style = "color:#FFA500; font-size:50px">Facets</span>
+
+The following examples are applicable when you use `facet_grid()` or `facet_wrap()` in your plot. Specically whenever using a `strip_*` argument, it applies to the part above each individual plot. Keep in mind that edits to the strip arguement are inherated by all strips. I believe there are ways to edit each strip individually but you will have to do some research on how to do that because I have not done that before.
+
+### Background
+
+```{r}
+base_plot +
+  facet_grid(~cyl) +
+  theme(strip.background = element_rect(colour = "purple", linetype = "dashed", size = 1, fill = "green"))
+```
+
+### Background (x-axis)
+
+```{r}
+base_plot +
+  facet_grid(gear~cyl) +
+  theme(strip.background.x = element_rect(colour = "red", fill = "yellow"))
+```
+
+### Background (y-axix)
+
+```{r}
+base_plot +
+  facet_grid(gear~cyl) +
+  theme(strip.background.y = element_rect(colour = "red", fill = "yellow"))
+```
+
+### Placement
+
+There are couple prerequistes that need to be included in your plot inorder for `strip_placement()` to work correctly. First, and probably most important is that your strip *must* share an axis with some label. In the example below you can see the strip shares the y-axis with the mpg scale. If the strip were placed at the top or to the left of the plot `strip.placment()` would be used optimally. The second requirement is that you use `facet_wrap()` instead of `facet_grid()`. Not sure what the particular reason is but if you use `facet_gride()` the `strip.placement()` will be ignored when rendering. The only argument that `strip.placement()` can take is a string that tells R to place the strip "inside" or "outside" of the plot. Below I provide examples of both.
+
+```{r}
+base_plot +
+  facet_wrap(~cyl, strip.position = "left") +
+  theme(strip.placement = "outside")
+```
+
+```{r}
+base_plot +
+  facet_wrap(~cyl, strip.position = "left") +
+  theme(strip.placement = "inside")
+```
+
+### Text
+
+```{r}
+base_plot +
+  facet_grid(~cyl) +
+  theme(strip.text = element_text(angle = 45, colour = "red", size = 15, hjust = .5, vjust = .7, face = "italic"))
+```
+
+### Text (x-axis)
+
+```{r}
+base_plot +
+  facet_grid(gear~cyl) +
+  theme(strip.text.x = element_text(angle = 45, colour = "red", size = 15, hjust = .5, vjust = .7, face = "italic"))
+```
+
+
+### Text (y-axis)
+
+```{r}
+base_plot +
+  facet_grid(gear~cyl) +
+  theme(strip.text.y = element_text(angle = 45, colour = "red", size = 15, hjust = .5, vjust = .7, face = "italic"))
+```
+
+### Switch pad grid
+
+```{r}
+
+```
+
+
+### Switch pad wrap
+
+```{r}
+
+```
+
+
+## <span style = "color:#FFA500; font-size:50px">Panel</span>
+
+### Background
+
+```{r}
+
+```
+
+### Border
+
+```{r}
+
+```
+
+### Spacing
+
+```{r}
+
+```
+
+### Spacing (x-axis)
+
+```{r}
+
+```
+
+### Spacing (y-axis)
+
+```{r}
+
+```
+
+### Grid
+
+```{r}
+
+```
+
+### Grid major
+
+```{r}
+
+```
+
+### Grid minor
+
+```{r}
+
+```
+
+### Grid major x-axis
+
+```{r}
+
+```
+
+### Grid major y-axis
+
+```{r}
+
+```
+
+### Grid minor x-axis
+
+```{r}
+
+```
+
+### Grid minor y-axis
+
+```{r}
+
+```
+
+### Ontop
+
+```{r}
+
+```
+
+
+
