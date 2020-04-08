@@ -16,7 +16,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   
 [[params.addtional_menus]]
   title =  "Twitter"
-  href = "https://twitter.com/Edgar_Zamora"
+  href = "https://twitter.com/Edgar_Zamora_"
   
 [[params.addtional_menus]]
   title =  "GitHub"

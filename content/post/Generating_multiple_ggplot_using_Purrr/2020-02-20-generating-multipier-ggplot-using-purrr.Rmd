@@ -14,12 +14,9 @@ image: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.
 publishdate: "Sys.Date"
 showtoc: false
 ---
-
-<<<<<<< HEAD
 At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using `ggplot`. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
-=======
+
 At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. What I would traditionally do is reuse code from one visualization to another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the `purrr` package to make the process quicker and more efficient. 
->>>>>>> a8e519ae83dca68ec56579b0707f6f63d6a77f5f
 
 For a quick solution to this question I would encourage you to check out my answer on [stackoverflow](https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675).
 
@@ -159,7 +156,6 @@ Doing this only overrides the specific argument within the command. Inside we de
 As indicated by the title of this post, we are also going to use the `purrr` package to take this function a step further by automating the need run each new plot independently as we did above. To do so we will use the `map` functions from the `purrr` package, specifically we will be using `map`.
 
 ```{r}
-<<<<<<< HEAD
 variables <- mpg %>% 
   select(class, cyl) %>% 
   names()
@@ -170,9 +166,6 @@ xxx <- function(x){
 
 map(variables, xxx)
 
-=======
-  
->>>>>>> cfedb22cf3501c30629f979f19b2fb9d2d930f6c
 ```
 
 For more specific about the `purrr` package and its various functions I encourage you to check out the `purrr` documentation [page](https://purrr.tidyverse.org) or the R [cheat sheets](https://rstudio.com/resources/cheatsheets/).
