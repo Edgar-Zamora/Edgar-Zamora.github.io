@@ -1,18 +1,17 @@
 ---
-title: "The Complete Theme Guide"
-author: "Edgar Zamora"
+title: The Complete Theme Guide
+author: Edgar Zamora
 date: '2020-04-02'
 slug: complete-theme-guide
 categories: []
 tags:
-- theme
-- ggplot
+  - theme
+  - ggplot
 subtitle: ''
 description: ''
-image: https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80
+image: 'https://images.unsplash.com/photo-1502691876148-a84978e59af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
 publishdate: Sys.Date
 showtoc: no
-draft: true
 ---
 []: # 'Photo by: Robert Katzki (@ro_ka)'
 
