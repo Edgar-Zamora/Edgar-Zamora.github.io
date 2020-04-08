@@ -25,6 +25,9 @@ While I created this theme, I followed the Hugo theme best practice and tried to
 **Wechat Pay & Alipay**
 ![screenshot](https://raw.githubusercontent.com/zhaohuabing/hugo-theme-cleanwhite/master/images/rewards.png)
 
+**Mind Map**
+![screenshot](https://raw.githubusercontent.com/zhaohuabing/hugo-theme-cleanwhite/master/images/mindmap.png)
+
 ## Quick Start
 
 The simplest way is to start with the example site coming with this theme, then you can play around and add your own stuff.
@@ -146,11 +149,45 @@ reward = true
 ```
 * Replace the QR codes of Wechat Pay & Alipay by overriding the photos in folder /static/img/reward/, otherwise the money will be sent to my accounts!
 
+* Enable Wechat Pay & Alipay in the site config
+```toml
+reward = true
+```
 
-## Thank
+### Mind Map
+
+Mind Map is supported with shortcode 'mind', instering the following code snippet into  your markdown file can create a mind map showing in the screenshots.
+
+```markdown
+{{% mind %}}
+- Root
+    - Level 1
+        - Level 2
+        - Level 2
+            - Level 3
+            - Level 3
+                - Level 4
+                    - Level 5
+                        - Level 6
+    - Level 1
+        - Level 2
+        - Level 2
+     - Level 1
+        - Level 2
+        - Level 2
+     - Level 1
+        - Level 2
+        - Level 2
+     - Level 1
+        - Level 2
+        - Level 2
+{{% /mind %}}
+```
+
+## Thanks
 Thanks for the great jobs of [huxblog Jekyll Theme](https://github.com/Huxpro/huxpro.github.io) and [Clean Blog Jekyll Theme](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll) which are the the two upstream projects CleanWhite Hugo theme is based on.
 
 ## Feedback
-If you find any problems, please feel free to [raise an issue](https://github.com/zhaohuabing/hugo-theme-cleanwhite/issues/new) or create a pull request to fix it. 
+If you find any problems, please feel free to [raise an issue](https://github.com/zhaohuabing/hugo-theme-cleanwhite/issues/new) or create a pull request to fix it.
 
 If it's helpful for you, I would appreciate it if you could star this repository, thanks!

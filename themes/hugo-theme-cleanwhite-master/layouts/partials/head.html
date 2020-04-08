@@ -57,9 +57,6 @@
     <!-- Hux CSS -->
     <link rel="stylesheet" href="{{ "css/hux-blog.min.css" | relURL }}">
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
-    
     <!-- zangshang CSS -->
     <link rel="stylesheet" href="{{ "css/zanshang.css" | relURL }}">
     
@@ -82,15 +79,6 @@
     
     <!-- Hux Theme JavaScript -->
     <script src="{{ "js/hux-blog.min.js" | relURL }}"></script>
-
-    <!-- Use the docco color scheme of highlight.js to highlight the code in the page -->
-    {{ if .Site.Params.highlightjs }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/{{ .Site.Params.highlightjs }}.min.css">
-    {{ else }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
-    {{ end }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 
     <!-- Custom JS -->
     {{ range .Site.Params.custom_js }}
