@@ -9,7 +9,7 @@ tags:
   - purrr
   - function
 subtitle: ''
-description: 'It is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
+descriptibuilon: 'It is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.'
 image: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80'
 publishdate: "Sys.Date"
 showtoc: false

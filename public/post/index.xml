@@ -6,19 +6,18 @@
     <description>Recent content in Posts on Edgar Zamora</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Fixing a reveresed axis</title>
-      <link>/2020/03/06/fixing-a-reveresed-axis/</link>
-      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      <title>The Complete Theme Guide</title>
+      <link>/2020/04/02/complete-theme-guide/</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/03/06/fixing-a-reveresed-axis/</guid>
-      <description>library(tidyverse) library(blogdown) Data comes from week 13 of #TidyTuesday.
-seattle_pets &amp;lt;- read_csv( &amp;quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-26/seattle_pets.csv&amp;quot;) ## Parsed with column specification: ## cols( ## license_issue_date = col_character(), ## license_number = col_character(), ## animals_name = col_character(), ## species = col_character(), ## primary_breed = col_character(), ## secondary_breed = col_character(), ## zip_code = col_character() ## ) seattle_pets %&amp;gt;% filter(!species %in% c(&amp;quot;Goat&amp;quot;, &amp;quot;Pig&amp;quot;)) %&amp;gt;% count(species, animals_name) %&amp;gt;% group_by(species) %&amp;gt;% top_n(10) %&amp;gt;% mutate(animals_name = replace_na(animals_name, &amp;quot;Unkown&amp;quot;)) %&amp;gt;% ggplot(aes(animals_name, n)) + geom_col() + labs( title = &amp;quot;Top 10 animal names among Cats and Dogs&amp;quot;, y = &amp;quot;&amp;quot;, x = &amp;quot;Name of Animal&amp;quot; ) + coord_flip() + facet_grid(~species) + theme( panel.</description>
+      <guid>/2020/04/02/complete-theme-guide/</guid>
+      <description>In creating visualizations, one aims not only to create a visualization that can convey the message behind the data but also to create a visualization that is appealing to the viewer. The theme function in ggplot allows for one to do so, but whenever I look at the reference page I sometimes become over whelmed by the number of components. For that reason, this post will focus on detailing non-data components of ones plot.</description>
     </item>
     
     <item>
@@ -27,7 +26,7 @@ seattle_pets &amp;lt;- read_csv( &amp;quot;https://raw.githubusercontent.com/rfo
       <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/02/20/generating-multipier-ggplot-using-purrr/</guid>
-      <description>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. What I would traditionally do is reuse code from one visualization to another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting.</description>
+      <description>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using ggplot. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code.</description>
     </item>
     
   </channel>

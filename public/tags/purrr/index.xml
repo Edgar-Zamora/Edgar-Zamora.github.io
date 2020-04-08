@@ -17,7 +17,7 @@
       <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/02/20/generating-multipier-ggplot-using-purrr/</guid>
-      <description>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. What I would traditionally do is reuse code from one visualization to another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting.</description>
+      <description>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using ggplot. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code.</description>
     </item>
     
   </channel>

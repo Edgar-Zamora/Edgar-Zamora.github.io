@@ -21,9 +21,9 @@
     
 
     
-    <meta name="description" content="It is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time.">
-    <meta property="og:description" content="It is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time." />
-    <meta property="twitter:description" content="It is commonly said within data science, if you have to copy code more than twice you should turn it into a function. For this post we will explore how to generate a function that produces similar ggplots, that vary slightly, using the rlang and purrr package. Doing so will create a more productive and cleaner workflow that should save you time." />
+    <meta name="description" content="">
+    <meta property="og:description" content="" />
+    <meta property="twitter:description" content="" />
     
 
     
@@ -47,9 +47,6 @@
     <link rel="stylesheet" href="/css/hux-blog.min.css">
 
     
-    <link rel="stylesheet" href="/css/syntax.css">
-    
-    
     <link rel="stylesheet" href="/css/zanshang.css">
     
     
@@ -67,13 +64,6 @@
     
     
     <script src="/js/hux-blog.min.js"></script>
-
-    
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 
     
     
@@ -108,7 +98,7 @@
                     
                     
 		    
-                        <li><a href="https://twitter.com/Edgar_Zamora">Twitter</a></li>
+                        <li><a href="https://twitter.com/Edgar_Zamora_">Twitter</a></li>
                     
                         <li><a href="https://github.com/Edgar-Zamora">GitHub</a></li>
                     
@@ -206,7 +196,7 @@
 
             
             <div class="
-                col-lg-8 col-lg-offset-2
+                col-lg-11 col-lg-offset-1
                 col-md-10 col-md-offset-1
                 post-container">
 
@@ -214,6 +204,7 @@
                 
 
 
+<p>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using <code>ggplot</code>. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the <code>purrr</code> package to make the process quicker and more efficient.</p>
 <p>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. What I would traditionally do is reuse code from one visualization to another simply by copying and pasting, but as is common emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the <code>purrr</code> package to make the process quicker and more efficient.</p>
 <p>For a quick solution to this question I would encourage you to check out my answer on <a href="https://stackoverflow.com/questions/57298510/how-to-generate-multiple-similar-ggplots-together/57314675#57314675">stackoverflow</a>.</p>
 <p>First things first, lets load all the necessary packages.</p>
@@ -266,14 +257,15 @@ library(knitr)</code></pre>
 <li><p>Similar to solving issues quicker, one can also increase their workflow and productively. Gone are those days were graphics are a large part of document.</p></li>
 <li><p>When creating functions for graphics you can spend less time on the building of the graphic and more time on customizing it to fit your needs.</p></li>
 </ol>
+<p>For additoinal reason for writing a function over copying and pasting, check out <a href="https://r4ds.had.co.nz/functions.html">Chapter 19</a> in R for Data Science by Grolemund and Wickham (2017).</p>
 </div>
 </div>
 <div id="lets-put-the-fun-in-function" class="section level1">
 <h1>Lets put the fun in (fun)ction</h1>
 <p>If you take a look at the code for both graphics from above, you can spot three differences:</p>
 <ol style="list-style-type: decimal">
-<li><p>The first variable in the <code>count()</code> function is different, in that one is “cyl” and the other is “class”.</p></li>
-<li>The variable in the ggplot aesthetic also varies in the same way that the <code>count()</code> function did.</li>
+<li><p>The first variable in the <code>count()</code> function is different, in that one variable is “cyl” and the other is “class”.</p></li>
+<li><p>The variable in the ggplot aesthetic also varies in the same way that the <code>count()</code> function did.</p></li>
 <li><p>The x-axis labels are different in that one references the “Number of Cylinders” while the other references “Vehicle Class”.</p></li>
 </ol>
 <p>Knowing that these are the only differences among both graphics, we can instruct the function to change according to those arguments. <strong>Note</strong> for this to work you should have the latest `rlang’ version installed.</p>
@@ -302,7 +294,11 @@ fun_plot2 &lt;- repetitive_ggplot(class)
 
 fun_plot1/fun_plot2 #patchwork to create stacked plots</code></pre>
 <p><img src="/post/Generating_multiple_ggplot_using_Purrr/2020-02-20-generating-multipier-ggplot-using-purrr_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>THERE YOU ARE!!!! We have created a function that avoids repeating code for similar ggplots. Now you may have noticed that we did not include the axis titles. To do that you need to add the <code>labs</code> function after the function as so.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+THERE YOU ARE!!!! We created a function that avoids repeating code for similar ggplots. Now you may have noticed that we dont include the axis titles. To do that you need to add the <code>labs</code> function after the function as so.
+=======
+THERE YOU ARE!!!! We have created a function that avoids repeating code for similar ggplots. Now you may have noticed that we did not include the axis titles. To do that you need to add the <code>labs</code> function after the function as so.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; a8e519ae83dca68ec56579b0707f6f63d6a77f5f</p>
 <pre class="r"><code>fun_plot1 &lt;- repetitive_ggplot(cyl) +
   labs(x = &quot;Number of Cylinders&quot;)
 
@@ -342,7 +338,7 @@ map(variables, xxx)</code></pre>
                     
                     
                     <li class="next">
-                        <a href="/2020/03/06/fixing-a-reveresed-axis/" data-toggle="tooltip" data-placement="top" title="Fixing a reveresed axis">Next
+                        <a href="/2020/04/02/complete-theme-guide/" data-toggle="tooltip" data-placement="top" title="The Complete Theme Guide">Next
                             Post &rarr;</a>
                     </li>
                     
@@ -356,7 +352,7 @@ map(variables, xxx)</code></pre>
             </div>
             
             <div class="
-                col-lg-8 col-lg-offset-2
+                col-lg-11 col-lg-offset-1
                 col-md-10 col-md-offset-1
                 sidebar-container">
 
@@ -398,6 +394,8 @@ map(variables, xxx)</code></pre>
                     
                     
                     
+            
+            
             
                 </ul>
 		<p class="copyright text-muted">
