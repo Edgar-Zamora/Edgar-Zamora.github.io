@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Edgar Zamora</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>ggplot</title>
       <link>/tags/ggplot/</link>
-      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/ggplot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rvest</title>
+      <link>/tags/rvest/</link>
+      <pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rvest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spotify</title>
+      <link>/tags/spotify/</link>
+      <pubDate>Wed, 20 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/spotify/</guid>
       <description></description>
     </item>
     

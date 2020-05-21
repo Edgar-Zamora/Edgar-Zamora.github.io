@@ -253,7 +253,7 @@ base_plot</code></pre>
 <div id="title" class="section level3">
 <h3>Title</h3>
 <pre class="r"><code>base_plot +
-  theme(plot.title = element_text(size = 25, face = &quot;plain&quot;, colour = &quot;purple&quot;, family = &quot;Helvetica LT Ultra Compressed&quot;))</code></pre>
+  theme(plot.title = element_text(size = 25, face = &quot;plain&quot;, colour = &quot;purple&quot;, family = &quot;Gill Sans MT&quot;))</code></pre>
 <p><img src="/post/complete_theme_guide/2020-04-02-complete-theme-guide_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="title-position" class="section level3">
@@ -286,7 +286,7 @@ base_plot</code></pre>
 <ol style="list-style-type: decimal">
 <li>Centimeters (<strong>“cm”</strong>)</li>
 <li>Inches (<strong>“in”</strong>)</li>
-<li>Millimeters (<strong>"mm</strong>)</li>
+<li>Millimeters (<strong>&quot;mm</strong>)</li>
 <li>Points (<strong>“pt”</strong>)</li>
 </ol>
 <p>A complete list of possible units and their conversions can be found by going to the <code>unit()</code> function <a href="https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/unit">reference page</a>.</p>
@@ -312,8 +312,8 @@ base_plot</code></pre>
   theme(strip.background.x = element_rect(colour = &quot;red&quot;, fill = &quot;yellow&quot;))</code></pre>
 <p><img src="/post/complete_theme_guide/2020-04-02-complete-theme-guide_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="background-y-axix" class="section level3">
-<h3>Background (y-axix)</h3>
+<div id="background-y-axis" class="section level3">
+<h3>Background (y-axis)</h3>
 <pre class="r"><code>base_plot +
   facet_grid(gear~cyl) +
   theme(strip.background.y = element_rect(colour = &quot;red&quot;, fill = &quot;yellow&quot;))</code></pre>
@@ -378,12 +378,34 @@ base_plot</code></pre>
 </div>
 <div id="grid" class="section level3">
 <h3>Grid</h3>
+<p>Those arguements that contiain <code>panel_grid_*</code> can be considered alike in their structure and effects on a plot. The principle of these arguements are to change the grid lines found on a plot, whether they are the major or minor along either the x-axis or y-axis. All of these arguments will use <code>element_test()</code>.</p>
+<pre class="r"><code>base_plot +
+  theme(
+    panel.grid = element_line(size = 1, colour = &quot;red&quot;))</code></pre>
+<p><img src="/post/complete_theme_guide/2020-04-02-complete-theme-guide_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="grid-major" class="section level3">
 <h3>Grid major</h3>
+<p>Whenever referencing the major lines of grid panel, you are referencing those values that appear on their correspending axis. What the values on the axis are automaticlly done when making any graphic, however if you would like to scale them to their own needs you can use the <code>scale_x_*</code> or <code>scale_y_*</code> function when build your plot.</p>
+<pre class="r"><code>base_plot +
+  theme(
+    panel.grid.major = element_line(size = 2, colour = &quot;purple&quot;))</code></pre>
+<p><img src="/post/complete_theme_guide/2020-04-02-complete-theme-guide_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="grid-minor" class="section level3">
 <h3>Grid minor</h3>
+<pre class="r"><code>base_plot +
+  theme(
+    panel.grid.minor = element_line(size = 2, colour = &quot;green&quot;)
+  )</code></pre>
+<p><img src="/post/complete_theme_guide/2020-04-02-complete-theme-guide_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>To make the difference between what constitutes a major and minor grid, below I have changed both and labeled them accordingly.</p>
+<pre class="r"><code>base_plot +
+  annotate(&quot;text&quot;, x = 2.2, y = 14, label = &quot;pipe?&quot;) +
+  theme(
+    panel.grid.major = element_line(size = 2, colour = &quot;purple&quot;),
+    panel.grid.minor = element_line(size = 2, colour = &quot;green&quot;))</code></pre>
+<p><img src="/post/complete_theme_guide/2020-04-02-complete-theme-guide_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="grid-major-x-axis" class="section level3">
 <h3>Grid major x-axis</h3>
@@ -414,6 +436,11 @@ base_plot</code></pre>
                             Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/05/20/how-fifa-added-to-my-musical-pallete/" data-toggle="tooltip" data-placement="top" title="How FIFA added to my musical pallete">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
