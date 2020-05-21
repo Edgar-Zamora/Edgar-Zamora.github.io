@@ -77,7 +77,7 @@ base_plot +
 
 ```{r}
 base_plot +
-  theme(plot.title = element_text(size = 25, face = "plain", colour = "purple", family = "Helvetica LT Ultra Compressed"))
+  theme(plot.title = element_text(size = 25, face = "plain", colour = "purple", family = "Gill Sans MT"))
 ```
 
 ### Title position
@@ -156,7 +156,7 @@ base_plot +
   theme(strip.background.x = element_rect(colour = "red", fill = "yellow"))
 ```
 
-### Background (y-axix)
+### Background (y-axis)
 
 ```{r}
 base_plot +
@@ -253,21 +253,44 @@ base_plot +
 
 ### Grid
 
-```{r}
+Those arguements that contiain `panel_grid_*` can be considered alike in their structure and effects on a plot. The principle of these arguements are to change the grid lines found on a plot, whether they are the major or minor along either the x-axis or y-axis. All of these arguments will use `element_test()`. 
 
+```{r}
+base_plot +
+  theme(
+    panel.grid = element_line(size = 1, colour = "red"))
 ```
 
 ### Grid major
 
-```{r}
+Whenever referencing the major lines of grid panel, you are referencing those values that appear on their correspending axis. What the values on the axis are automaticlly done when making any graphic, however if you would like to scale them to their own needs you can use the `scale_x_*` or `scale_y_*` function when build your plot. 
 
+```{r}
+base_plot +
+  theme(
+    panel.grid.major = element_line(size = 2, colour = "purple"))
 ```
 
 ### Grid minor
 
 ```{r}
-
+base_plot +
+  theme(
+    panel.grid.minor = element_line(size = 2, colour = "green")
+  )
 ```
+
+To make the difference between what constitutes a major and minor grid, below I have changed both and labeled them accordingly.
+
+```{r}
+base_plot +
+  annotate("text", x = 2.2, y = 14, label = "pipe?") +
+  theme(
+    panel.grid.major = element_line(size = 2, colour = "purple"),
+    panel.grid.minor = element_line(size = 2, colour = "green"))
+```
+
+
 
 ### Grid major x-axis
 
