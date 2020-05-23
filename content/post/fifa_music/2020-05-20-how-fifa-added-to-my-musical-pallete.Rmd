@@ -1,5 +1,5 @@
 ---
-title: How FIFA added to my musical pallete
+title: Exploring how EA Sports' FIFA added to my preference in music using the spotifyr package in R
 author: Edgar Zamora
 date: '2020-05-20'
 slug: how-fifa-added-to-my-musical-pallete
