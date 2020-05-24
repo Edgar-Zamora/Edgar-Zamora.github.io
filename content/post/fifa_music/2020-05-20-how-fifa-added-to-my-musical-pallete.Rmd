@@ -25,7 +25,6 @@ There certainly are other peices that offer similar type of analysis but what I 
 In order to connect to the Spotify API, you will have to make an account with the [Spotify for Developers](https://developer.spotify.com/dashboard/) site. I do believe you need an active Spotify account but it does not have to be preimium. After setting that up, you will need to copy authentication from the developer site into R. It should look something like below with your own authorization code:
 
 ```{r authenticating, include=FALSE}
-library(googlesheets4)
 library(tidyverse)
 library(spotifyr)
 library(knitr)
@@ -50,37 +49,55 @@ For a detailed walkthrough I would recommend reading the [documention](https://w
 
 # Data
 
-```{r }
-fifa_playlist <- read_sheet("https://docs.google.com/spreadsheets/d/1Lg39Yx1MkN6AJj4pxhEtsewSSEyyVynou-Z_Ur6qP3Y/edit#gid=0") %>% 
+```{r data_import}
+
+fifa_playlist <- read_csv("fifa_music.csv") %>% 
   mutate(title = as.character(title),
          year = as.character(year)) %>% 
   rename(track_name = title,
          artist_name = artist)
+
 
 track_info <- function(artist, title) {
   
   get_artist_audio_features({{artist}}) %>% 
     select(artist_name, track_name, album_release_year, danceability:tempo, duration_ms, key_mode) %>% 
     filter(track_name == {{title}})
-  
-}
+  }
 
 #Prepaing artist and tracks as to be able to iterate over them
 artists <- fifa_playlist %>% 
-  slice(1:5) %>% 
+  slice(1:25) %>% 
   pull(artist_name)
   
 tracks <- fifa_playlist %>% 
-  slice(1:5) %>% 
+  slice(1:25) %>% 
   pull(track_name)
 
 #Iterate over each of the artist and their title to get the track information
-fifa_playlist %>% 
-  slice(1:5) %>% 
+#fifa_playlist %>% 
+#  slice(1:5) %>% 
+#  mutate(output = map2(artists, tracks, safely(track_info, 
+#                                               otherwise = NA)),
+#         error = map2(artists, tracks, ~pluck(., "error"))) %>% 
+#  unnest(output)
+
+
+zzz <- fifa_playlist %>% 
+  slice(1:25) %>% 
   mutate(output = map2(artists, tracks, safely(track_info, 
-                                               otherwise = NA)),
-         error = map2(artists, tracks, ~pluck(., "error"))) %>% 
+                                               otherwise = NA)))
+
+www <- zzz %>% 
+  unnest(output) %>% 
+  mutate(error = if_else(is.na(output), "error", "none")) %>% 
+  slice(seq(1, n(), by = 2)) %>% 
+  rename(artist_name.x = artist_name,
+         track_name.y = track_name) %>% 
   unnest(output)
+
+
+
 ```
 
 

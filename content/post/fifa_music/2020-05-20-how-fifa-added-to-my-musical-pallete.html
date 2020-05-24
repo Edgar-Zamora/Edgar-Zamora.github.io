@@ -384,49 +384,50 @@ access_token &lt;- get_spotify_access_token()</code></pre>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
-<pre class="r"><code>fifa_playlist &lt;- read_sheet(&quot;https://docs.google.com/spreadsheets/d/1Lg39Yx1MkN6AJj4pxhEtsewSSEyyVynou-Z_Ur6qP3Y/edit#gid=0&quot;) %&gt;% 
+<pre class="r"><code>fifa_playlist &lt;- read_csv(&quot;fifa_music.csv&quot;) %&gt;% 
   mutate(title = as.character(title),
          year = as.character(year)) %&gt;% 
   rename(track_name = title,
          artist_name = artist)
+
 
 track_info &lt;- function(artist, title) {
   
   get_artist_audio_features({{artist}}) %&gt;% 
     select(artist_name, track_name, album_release_year, danceability:tempo, duration_ms, key_mode) %&gt;% 
     filter(track_name == {{title}})
-  
-}
+  }
 
 #Prepaing artist and tracks as to be able to iterate over them
 artists &lt;- fifa_playlist %&gt;% 
-  slice(1:5) %&gt;% 
+  slice(1:25) %&gt;% 
   pull(artist_name)
   
 tracks &lt;- fifa_playlist %&gt;% 
-  slice(1:5) %&gt;% 
+  slice(1:25) %&gt;% 
   pull(track_name)
 
 #Iterate over each of the artist and their title to get the track information
-fifa_playlist %&gt;% 
-  slice(1:5) %&gt;% 
+#fifa_playlist %&gt;% 
+#  slice(1:5) %&gt;% 
+#  mutate(output = map2(artists, tracks, safely(track_info, 
+#                                               otherwise = NA)),
+#         error = map2(artists, tracks, ~pluck(., &quot;error&quot;))) %&gt;% 
+#  unnest(output)
+
+
+zzz &lt;- fifa_playlist %&gt;% 
+  slice(1:25) %&gt;% 
   mutate(output = map2(artists, tracks, safely(track_info, 
-                                               otherwise = NA)),
-         error = map2(artists, tracks, ~pluck(., &quot;error&quot;))) %&gt;% 
+                                               otherwise = NA)))
+
+www &lt;- zzz %&gt;% 
+  unnest(output) %&gt;% 
+  mutate(error = if_else(is.na(output), &quot;error&quot;, &quot;none&quot;)) %&gt;% 
+  slice(seq(1, n(), by = 2)) %&gt;% 
+  rename(artist_name.x = artist_name,
+         track_name.y = track_name) %&gt;% 
   unnest(output)</code></pre>
-<pre><code>## # A tibble: 10 x 5
-##    artist_name          track_name          year  output             error 
-##    &lt;chr&gt;                &lt;chr&gt;               &lt;chr&gt; &lt;list&gt;             &lt;list&gt;
-##  1 Andreya Triana       Beautiful People    2019  &lt;df[,16] [1 × 16]&gt; &lt;NULL&gt;
-##  2 Andreya Triana       Beautiful People    2019  &lt;NULL&gt;             &lt;NULL&gt;
-##  3 Atomic Drum Assembly Island Life         2019  &lt;df[,16] [1 × 16]&gt; &lt;NULL&gt;
-##  4 Atomic Drum Assembly Island Life         2019  &lt;NULL&gt;             &lt;NULL&gt;
-##  5 Bakar                Big Dreams          2019  &lt;df[,16] [1 × 16]&gt; &lt;NULL&gt;
-##  6 Bakar                Big Dreams          2019  &lt;NULL&gt;             &lt;NULL&gt;
-##  7 Bantu &amp; Dr. Chaii    Jackie Chan         2019  &lt;lgl [1]&gt;          &lt;NULL&gt;
-##  8 Bantu &amp; Dr. Chaii    Jackie Chan         2019  &lt;smplErrr&gt;         &lt;NULL&gt;
-##  9 Bas                  Tribe feat. J. Cole 2019  &lt;df[,16] [0 × 16]&gt; &lt;NULL&gt;
-## 10 Bas                  Tribe feat. J. Cole 2019  &lt;NULL&gt;             &lt;NULL&gt;</code></pre>
 </div>
 
 
