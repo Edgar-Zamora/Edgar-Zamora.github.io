@@ -9,6 +9,68 @@ tags:
   - spotify
   - ggplot
 subtitle: ''
-description: ''
+description: 'In this article I explore various attributes about each track from the FIFA video game using the spotifyr package in R'
 image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
 ---
+
+Anyone who has played *FIFA* has experienced every type of emotion ranging from anger after loosing that ranked match or pure bliss from winning a game against your older cousin in stoppage time. Whatever emotion that *FIFA* may engender from you, we keep coming back year after year to enjoy a game that offers more than just football (soccer). Over the years my reason for coming back to FIFA has grown from just being mostly about the game itself (game modes, new players, etc.) to now including the music that is used in throughout. I strongly believe that through *FIFA* I have been able to experience new reneges of music that otherwise may have not or taken long to enter my life.
+
+My decision to write about how *FIFA* has changed and/or contributed to peoples musical preference is not new. I came across a Vice [article](https://www.vice.com/en_us/article/9k3jga/how-fifa-games-changed-our-tastes-in-music) that analyzes *FIFA* music starting with *FIFA* 99 up to *FIFA* 18. The article does an excllent describing the progess of what the music was and how it has changed into todays incarnation. Additional discussions of the impact of *FIFA*'s music choices can been seen on a [reddit](https://www.reddit.com/r/FIFA/comments/7nnx6f/fifa_music_should_be_considered_its_own_genre/) forum that explores whether *FIFA* music should be considered its own genre. 
+
+There certainly are other peices that offer similar type of analysis but what I feel is missing is an analysis that specifically looks at the features of each track. In this article I will visualize different features of each *FIFA* track including, but not limited to, energy, loudness, and other features. To do so I will be using the `spotifyr` package by Charlie Thompson, Josiah Parry, Donal Phipps, and Tom Wolff which is an "R wrapper for pulling track audio features and other information from Spotify’s Web API in bulk.". 
+
+
+# Connecting to data with `spotifyr`
+
+In order to connect to the Spotify API, you will have to make an account with the [Spotify for Developers](https://developer.spotify.com/dashboard/) site. I do believe you need an active Spotify account but it does not have to be preimium. After setting that up, you will need to copy authentication from the developer site into R. It should look something like below with your own authorization code:
+
+```{r authenticating, include=FALSE}
+Sys.setenv(SPOTIFY_CLIENT_ID = '9d31a6fe89fc4bbda898cd726a12d593')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = '79c0d581fa314b999d6f747e380dd412')
+
+access_token <- get_spotify_access_token()
+```
+
+
+```{r authenticating_test}
+Sys.setenv(SPOTIFY_CLIENT_ID = 'your_client_id')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = 'your_client_secret')
+
+access_token <- get_spotify_access_token()
+```
+
+For a detailed walkthrough I would recommend reading the [documention](https://www.rcharlie.com/spotifyr/) for the `spotifyr` package. 
+
+# Data
+
+```{r}
+track_info <- function(artist, title) {
+  
+  get_artist_audio_features({{artist}}) %>% 
+    select(artist_name, track_name, album_release_year, danceability:tempo, duration_ms, key_mode) %>% 
+    filter(track_name == {{title}})
+  
+}
+
+#Prepaing artist and tracks as to be able to iterate over them
+artists <- fifa_playlist %>% 
+  slice(1:5) %>% 
+  pull(artist_name)
+  
+tracks <- fifa_playlist %>% 
+  slice(1:5) %>% 
+  pull(track_name)
+
+#Iterate over each of the artist and their title to get the track information
+fifa_playlist %>% 
+  slice(1:5) %>% 
+  mutate(output = map2(artists, tracks, safely(track_info, 
+                                               otherwise = NA)),
+         error = map2(artists, tracks, ~pluck(., "error"))) %>% 
+  unnest(output)
+```
+
+
+
+
+
