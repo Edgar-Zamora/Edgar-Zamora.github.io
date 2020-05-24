@@ -15,15 +15,15 @@
     
 
     
-    <meta name="title" content="How FIFA added to my musical pallete" />
-    <meta property="og:title" content="How FIFA added to my musical pallete" />
-    <meta property="twitter:title" content="How FIFA added to my musical pallete" />
+    <meta name="title" content="Exploring how EA Sports&#39; FIFA added to my preference in music using the spotifyr package in R" />
+    <meta property="og:title" content="Exploring how EA Sports&#39; FIFA added to my preference in music using the spotifyr package in R" />
+    <meta property="twitter:title" content="Exploring how EA Sports&#39; FIFA added to my preference in music using the spotifyr package in R" />
     
 
     
-    <meta name="description" content="">
-    <meta property="og:description" content="" />
-    <meta property="twitter:description" content="" />
+    <meta name="description" content="In this article I explore various attributes about each track from the FIFA video game using the spotifyr package in R">
+    <meta property="og:description" content="In this article I explore various attributes about each track from the FIFA video game using the spotifyr package in R" />
+    <meta property="twitter:description" content="In this article I explore various attributes about each track from the FIFA video game using the spotifyr package in R" />
     
 
     
@@ -34,7 +34,7 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>How FIFA added to my musical pallete-</title>
+    <title>Exploring how EA Sports&#39; FIFA added to my preference in music using the spotifyr package in R-</title>
 
     <link rel="canonical" href="/2020/05/20/how-fifa-added-to-my-musical-pallete/">
 
@@ -168,7 +168,7 @@
                         </a>
                         
                     </div>
-                    <h1>How FIFA added to my musical pallete</h1>
+                    <h1>Exploring how EA Sports&#39; FIFA added to my preference in music using the spotifyr package in R</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 
@@ -209,7 +209,65 @@
                 
 
 
-<p>test out new post</p>
+<p>Anyone who has played <em>FIFA</em> has experienced every type of emotion ranging from anger after loosing that ranked match or pure bliss from winning a game against your older cousin in stoppage time. Whatever emotion that <em>FIFA</em> may engender from you, we keep coming back year after year to enjoy a game that offers more than just football (soccer). Over the years my reason for coming back to FIFA has grown from just being mostly about the game itself (game modes, new players, etc.) to now including the music that is used in throughout. I strongly believe that through <em>FIFA</em> I have been able to experience new reneges of music that otherwise may have not or taken long to enter my life.</p>
+<p>My decision to write about how <em>FIFA</em> has changed and/or contributed to peoples musical preference is not new. I came across a Vice <a href="https://www.vice.com/en_us/article/9k3jga/how-fifa-games-changed-our-tastes-in-music">article</a> that analyzes <em>FIFA</em> music starting with <em>FIFA</em> 99 up to <em>FIFA</em> 18. The article does an excllent describing the progess of what the music was and how it has changed into todays incarnation. Additional discussions of the impact of <em>FIFA</em>’s music choices can been seen on a <a href="https://www.reddit.com/r/FIFA/comments/7nnx6f/fifa_music_should_be_considered_its_own_genre/">reddit</a> forum that explores whether <em>FIFA</em> music should be considered its own genre.</p>
+<p>There certainly are other peices that offer similar type of analysis but what I feel is missing is an analysis that specifically looks at the features of each track. In this article I will visualize different features of each <em>FIFA</em> track including, but not limited to, energy, loudness, and other features. To do so I will be using the <code>spotifyr</code> package by Charlie Thompson, Josiah Parry, Donal Phipps, and Tom Wolff which is an “R wrapper for pulling track audio features and other information from Spotify’s Web API in bulk.”.</p>
+<div id="connecting-to-data-with-spotifyr" class="section level1">
+<h1>Connecting to data with <code>spotifyr</code></h1>
+<p>In order to connect to the Spotify API, you will have to make an account with the <a href="https://developer.spotify.com/dashboard/">Spotify for Developers</a> site. I do believe you need an active Spotify account but it does not have to be preimium. After setting that up, you will need to copy authentication from the developer site into R. It should look something like below with your own authorization code:</p>
+<pre class="r"><code>Sys.setenv(SPOTIFY_CLIENT_ID = &#39;your_client_id&#39;)
+Sys.setenv(SPOTIFY_CLIENT_SECRET = &#39;your_client_secret&#39;)
+
+access_token &lt;- get_spotify_access_token()</code></pre>
+<p>For a detailed walkthrough I would recommend reading the <a href="https://www.rcharlie.com/spotifyr/">documention</a> for the <code>spotifyr</code> package.</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<pre class="r"><code>fifa_playlist &lt;- read_csv(&quot;fifa_music.csv&quot;) %&gt;% 
+  mutate(title = as.character(title),
+         year = as.character(year)) %&gt;% 
+  rename(track_name = title,
+         artist_name = artist)
+
+
+track_info &lt;- function(artist, title) {
+  
+  get_artist_audio_features({{artist}}) %&gt;% 
+    select(artist_name, track_name, album_release_year, danceability:tempo, duration_ms, key_mode) %&gt;% 
+    filter(track_name == {{title}})
+  }
+
+#Prepaing artist and tracks as to be able to iterate over them
+artists &lt;- fifa_playlist %&gt;% 
+  slice(1:25) %&gt;% 
+  pull(artist_name)
+  
+tracks &lt;- fifa_playlist %&gt;% 
+  slice(1:25) %&gt;% 
+  pull(track_name)
+
+#Iterate over each of the artist and their title to get the track information
+#fifa_playlist %&gt;% 
+#  slice(1:5) %&gt;% 
+#  mutate(output = map2(artists, tracks, safely(track_info, 
+#                                               otherwise = NA)),
+#         error = map2(artists, tracks, ~pluck(., &quot;error&quot;))) %&gt;% 
+#  unnest(output)
+
+
+zzz &lt;- fifa_playlist %&gt;% 
+  slice(1:25) %&gt;% 
+  mutate(output = map2(artists, tracks, safely(track_info, 
+                                               otherwise = NA)))
+
+www &lt;- zzz %&gt;% 
+  unnest(output) %&gt;% 
+  mutate(error = if_else(is.na(output), &quot;error&quot;, &quot;none&quot;)) %&gt;% 
+  slice(seq(1, n(), by = 2)) %&gt;% 
+  rename(artist_name.x = artist_name,
+         track_name.y = track_name) %&gt;% 
+  unnest(output)</code></pre>
+</div>
 
 
                 

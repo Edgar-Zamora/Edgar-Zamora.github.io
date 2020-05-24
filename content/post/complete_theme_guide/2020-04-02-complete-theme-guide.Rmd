@@ -76,8 +76,8 @@ base_plot +
 ### Title
 
 ```{r}
-base_plot +
-  theme(plot.title = element_text(size = 25, face = "plain", colour = "purple", family = "Gill Sans MT"))
+#base_plot +
+#  theme(plot.title = element_text(size = 25, face = "plain", colour = "purple", family = "Gill Sans MT"))
 ```
 
 ### Title position
