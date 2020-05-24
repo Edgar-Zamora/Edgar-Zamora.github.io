@@ -25,6 +25,13 @@ There certainly are other peices that offer similar type of analysis but what I 
 In order to connect to the Spotify API, you will have to make an account with the [Spotify for Developers](https://developer.spotify.com/dashboard/) site. I do believe you need an active Spotify account but it does not have to be preimium. After setting that up, you will need to copy authentication from the developer site into R. It should look something like below with your own authorization code:
 
 ```{r authenticating, include=FALSE}
+library(googlesheets4)
+library(tidyverse)
+library(spotifyr)
+library(knitr)
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
 Sys.setenv(SPOTIFY_CLIENT_ID = '9d31a6fe89fc4bbda898cd726a12d593')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = '79c0d581fa314b999d6f747e380dd412')
 
@@ -32,7 +39,7 @@ access_token <- get_spotify_access_token()
 ```
 
 
-```{r authenticating_test}
+```{r authenticating_test, eval=FALSE}
 Sys.setenv(SPOTIFY_CLIENT_ID = 'your_client_id')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = 'your_client_secret')
 
@@ -43,7 +50,13 @@ For a detailed walkthrough I would recommend reading the [documention](https://w
 
 # Data
 
-```{r}
+```{r }
+fifa_playlist <- read_sheet("https://docs.google.com/spreadsheets/d/1Lg39Yx1MkN6AJj4pxhEtsewSSEyyVynou-Z_Ur6qP3Y/edit#gid=0") %>% 
+  mutate(title = as.character(title),
+         year = as.character(year)) %>% 
+  rename(track_name = title,
+         artist_name = artist)
+
 track_info <- function(artist, title) {
   
   get_artist_audio_features({{artist}}) %>% 
