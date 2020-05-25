@@ -67,11 +67,11 @@ track_info <- function(artist, title) {
 
 #Prepaing artist and tracks as to be able to iterate over them
 artists <- fifa_playlist %>% 
-  slice(1:25) %>% 
+  slice(1:100) %>% 
   pull(artist_name)
   
 tracks <- fifa_playlist %>% 
-  slice(1:25) %>% 
+  slice(1:100) %>% 
   pull(track_name)
 
 #Iterate over each of the artist and their title to get the track information
@@ -84,7 +84,7 @@ tracks <- fifa_playlist %>%
 
 
 zzz <- fifa_playlist %>% 
-  slice(1:25) %>% 
+  slice(1:100) %>% 
   mutate(output = map2(artists, tracks, safely(track_info, 
                                                otherwise = NA)))
 
@@ -97,6 +97,29 @@ www <- zzz %>%
   unnest(output)
 
 
+www
+
+
+vvv <- www %>% 
+  group_by(artist_name.x, track_name.y, year, artist_name, track_name, duration_ms, key_mode, mode) %>% 
+  #print(n = Inf)
+  summarise(
+    danceability = mean(danceability),
+    energy = mean(energy),
+    loudness = mean(loudness),
+    speechiness = mean(speechiness),
+    acousticness = mean(acousticness),
+    instrumentalness  = mean(instrumentalness),
+    liveness = mean(liveness),
+    tempo = mean(tempo),
+    valence = mean(valence)) %>%
+  ungroup()
+
+
+vvv %>% 
+  filter(!is.na(artist_name)) %>% 
+  ggplot(aes(valence, colour = year)) +
+  geom_density()
 
 ```
 
