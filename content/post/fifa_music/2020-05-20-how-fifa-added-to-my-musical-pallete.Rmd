@@ -82,20 +82,11 @@ For a detailed walk through I would recommend reading the [documention](https://
 To access the dataset, you can visit my [GitHub](https://github.com/Edgar-Zamora/Edgar-Zamora.github.io/tree/master/content/post/fifa_music) where I have the script and data that you can use if you would like to conduct your own analysis. In total there were 664 tracks for all *FIFA* games starting from 2002. I start at 2002 because the games before this included fewer than 10 songs which would have not been that insightful. After joining the list of tracks with the Spotify API using the `spotifyr` package, there were a total of 411 tracks that features. I encountered trouble when trying separate the result and error of my `map2` function. I listened to and followed Dani Chu's 2019 RStudio Conference [presentation](https://docs.google.com/presentation/d/1P9iT_TQUoxxCyvkfCLe5Y-9xBWpHh7btlP2mQ3XyNOM/edit#slide=id.g54c124210e_0_0) to aid in solving this issue. Though all the issues were not resolved it did keep me sane while having attempted it on my own. In the future I intend to go back and get a more complete list of tracks but for now I believe the current dataset should work.
 
 
-Below delving into the attributes of the tracks, it would be interesting to see how the volume of tracks have changed over the years. In the figure below, we can see that the number of tracks included in each version of *FIFA* has flucated over time with the highest being with *FIFA* 17 and the lowest with *FIFA* 13 with an average of 36 tracks per game. *FIFA* 20 is not included in this data set because with the introduction of the new game mode, (Volta)[https://www.goal.com/en-us/news/fifa-20-volta-what-is-the-new-5-a-side-mode-how-is-it/13tbwqka87rab12rw9noitdpzt], it pushes the playlist to over 100 tracks. If we only consider the menu tracks its stays in mirrors the total of *FIFA* 19 with 43 total tracks.
+Below delving into the attributes of the tracks, it would be interesting to see how the volume of tracks have changed over the years. In the figure below, we can see that the number of tracks included in each version of *FIFA* has flucated over time with the highest being with *FIFA* 17 and the lowest with *FIFA* 13 with an average of 36 tracks per game. *FIFA* 20 is not included in this data set because with the introduction of the new game mode, [Volta](https://www.goal.com/en-us/news/fifa-20-volta-what-is-the-new-5-a-side-mode-how-is-it/13tbwqka87rab12rw9noitdpzt), it pushes the playlist to over 100 tracks. If we only consider the menu tracks its stays in mirrors the total of *FIFA* 19 with 43 total tracks.
 
 ```{r tracks_per_yr, echo=FALSE, fig.align='center', fig.height=8, fig.width=10}
 #General Overview
 #Number of trackers per game
-
-rects <- tibble(
-  xmin = c(-Inf, 6.5, 12.5, 18.5, 24.5, 30.5, 36.5, 43.5, 50.5),
-  xmax = c(7, 13, 19, 25, 31, 37, 44, 51, Inf),
-  ymin = rep(-Inf, 9),
-  ymax = rep(Inf, 9)#4a6f28
-)
-
-
 fifa_playlist %>% 
   count(year) %>% 
   ggplot(aes(year, n)) +
@@ -137,5 +128,10 @@ fifa_playlist %>%
 ```
 
 #Exploring the tracks
+
+
+
+
+
 
 
