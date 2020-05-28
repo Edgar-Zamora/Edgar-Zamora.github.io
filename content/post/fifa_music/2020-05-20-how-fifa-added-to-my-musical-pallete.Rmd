@@ -36,26 +36,11 @@ library(extrafont)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
-#Connecting to Spotify data
-Sys.setenv(SPOTIFY_CLIENT_ID = '9d31a6fe89fc4bbda898cd726a12d593')
-Sys.setenv(SPOTIFY_CLIENT_SECRET = '79c0d581fa314b999d6f747e380dd412')
-
-access_token <- get_spotify_access_token()
-
 #Cleaning dataset with list of songs
-fifa_playlist <- read_csv("fifa_music.csv") %>% 
-  mutate(title = as.character(title),
-         year = as.character(year)) %>% 
-  rename(track_name = title,
-         artist_name = artist) %>% 
-  filter(track_name != "Kids",
-         year >= "2002") %>% 
-  group_by_all() %>% 
-  summarise() %>% 
-  ungroup()
+fifa_playlist <- read_csv("fifa_music_cleaned.csv")
 
 #Importing FIFA font
-font_import('EA Font v1.5 by Ghettoshark')
+#font_import('EA Font v1.5 by Ghettoshark')
 
 ```
 
@@ -102,8 +87,7 @@ fifa_playlist %>%
   labs(
     y = NULL,
     x = NULL,
-    title = "Number of tracks per *FIFA* game over the years"
-    ) +
+    title = "Number of tracks per *FIFA* game over the years") +
   theme(
     panel.grid = element_blank(),
     panel.background = element_blank(),
@@ -120,14 +104,18 @@ In addition to knowing which edition has the most tracks, it is cool to know whi
 ```{r count_track_tbl, echo=FALSE}
 #Top 25 featured artists
 fifa_playlist %>% 
-  count(artist_name) %>%
-  rename(Artist = artist_name,
+  count(artist_name.x) %>%
+  rename(Artist = artist_name.x,
          `Number of tracks` = n) %>% 
   arrange(desc(`Number of tracks`)) %>% 
   datatable(caption = "Number of times an Artist has been included in FIFA")
 ```
 
 #Exploring the tracks
+
+```{r}
+
+```
 
 
 
