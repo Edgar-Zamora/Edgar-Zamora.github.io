@@ -13,7 +13,7 @@ description: 'In this article I explore various attributes about each track from
 image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
 ---
 
-Anyone who has played *FIFA* has experienced every type of emotion ranging from anger after loosing that ranked match or pure bliss from winning a game against your older cousin in stoppage time. Whatever emotion that *FIFA* may engender from you, we keep coming back year after year to enjoy a game that offers more than just football (soccer). Over the years my reason for coming back to FIFA has grown from just being mostly about the game itself (game modes, new players, etc.) to now including the music that is used in throughout. I strongly believe that through *FIFA* I have been able to experience new reneges of music that otherwise may have not or taken long to enter my life.
+Anyone who has played *FIFA* has experienced every type of emotion ranging from anger after loosing that ranked match or pure bliss from winning a game against your older cousin in stoppage time. Whatever emotion that *FIFA* may engender from you, we keep coming back year after year to enjoy a game that offers more than just football (soccer). Over the years my reason for coming back to FIFA has grown from just being mostly about the game itself (game modes, new players, etc.) to now including the music that is used throughout. I strongly believe that through *FIFA* I have been able to experience new generes of music that otherwise may have not or taken long to enter my life.
 
 My decision to write about how *FIFA* has changed and/or contributed to peoples musical preference is not new. I came across a Vice [article](https://www.vice.com/en_us/article/9k3jga/how-fifa-games-changed-our-tastes-in-music) that analyzes *FIFA* music starting with *FIFA* 99 up to *FIFA* 18. The article does an excllent describing the progess of what the music was and how it has changed into today's incarnation. Additional discussions of the impact of *FIFA*'s music choices can been seen on a [reddit](https://www.reddit.com/r/FIFA/comments/7nnx6f/fifa_music_should_be_considered_its_own_genre/) forum that explores whether *FIFA* music should be considered its own genre. 
 
@@ -79,10 +79,10 @@ For a detailed walk through I would recommend reading the [documention](https://
 
 # Data
 
-To access the dataset, you can visit my [GitHub](https://github.com/Edgar-Zamora/Edgar-Zamora.github.io/tree/master/content/post/fifa_music) where I have the script and data that you can use if you would like to conduct your own analysis. In total there were 664 tracks for all *FIFA* games starting from 2002. I start at 2002 because the games before this included fewer than 10 songs which would have not been that insightful. After joining the list of tracks with the Spotify API using the `spotifyr` package, there were a total of 411 tracks that features. I encountered trouble when trying separate the result and error of my `map2` function. I listened to and followed Dani Chu's 2019 RStudio Conference [presentation](https://docs.google.com/presentation/d/1P9iT_TQUoxxCyvkfCLe5Y-9xBWpHh7btlP2mQ3XyNOM/edit#slide=id.g54c124210e_0_0) to aid in solving this issue. Though all the issues were not resolved it did keep me sane while having attempted it on my own. In the future I intend to go back and get a more complete list of tracks but for now I believe the current dataset should work.
+To access the dataset, you can visit my [GitHub](https://github.com/Edgar-Zamora/Edgar-Zamora.github.io/tree/master/content/post/fifa_music) where I have the script and data that you can use if you would like to conduct your own analysis. In total there were 664 tracks for all *FIFA* games starting from 2002. I start at 2002 because the games before this included fewer than 10 songs which would have not been that insightful. After joining the list of tracks with the Spotify API using the `spotifyr` package, there were a total of 411 tracks that had features. I encountered trouble when trying to separate the result and error of my `map2` function. I listened to and followed Dani Chu's 2019 RStudio Conference [presentation](https://docs.google.com/presentation/d/1P9iT_TQUoxxCyvkfCLe5Y-9xBWpHh7btlP2mQ3XyNOM/edit#slide=id.g54c124210e_0_0) to aid in solving this issue. Though all the issues were not resolved it did keep me sane while having attempted it on my own. In the future I intend to go back and get a more complete list of tracks but for now I believe the current dataset should work.
 
 
-Below delving into the attributes of the tracks, it would be interesting to see how the volume of tracks have changed over the years. In the figure below, we can see that the number of tracks included in each version of *FIFA* has flucated over time with the highest being with *FIFA* 17 and the lowest with *FIFA* 13 with an average of 36 tracks per game. *FIFA* 20 is not included in this data set because with the introduction of the new game mode, [Volta](https://www.goal.com/en-us/news/fifa-20-volta-what-is-the-new-5-a-side-mode-how-is-it/13tbwqka87rab12rw9noitdpzt), it pushes the playlist to over 100 tracks. If we only consider the menu tracks its stays in mirrors the total of *FIFA* 19 with 43 total tracks.
+Below delving into the attributes of the tracks, it would be interesting to see how the volume of tracks have changed over the years. In the figure below, we can see that the number of tracks included in each version of *FIFA* has fluctuated over time with the highest being with *FIFA* 17 and the lowest with *FIFA* 13 with an average of 36 tracks per game. *FIFA* 20 is not included in this data set because with the introduction of the new game mode, [Volta](https://www.goal.com/en-us/news/fifa-20-volta-what-is-the-new-5-a-side-mode-how-is-it/13tbwqka87rab12rw9noitdpzt), it pushes the playlist to over 100 tracks. If we only consider the menu tracks its stays in mirrors the total of *FIFA* 19 with 43 total tracks.
 
 ```{r tracks_per_yr, echo=FALSE, fig.align='center', fig.height=8, fig.width=10}
 #General Overview
@@ -115,7 +115,7 @@ fifa_playlist %>%
 ```
 
 
-In addition to knowing which edition has the most tracks, it is cool to know which artist(s) (I acknowledge some of these may be collobarations or bands) have been included most over the years. Of the 578 unique artists, only 65 (11%) have had one of thier songs included more than once in FIFA, which to me is great! I personally enjoy that EA Sports includes various artists becuase it allows me to explore artists that I may have not encountered on my own. Below you can use the table to search through all the artists and see how many times they have been included.
+In addition to knowing which edition has the most tracks, it is cool to know which artist(s) (I acknowledge some of these may be collaborations or bands) have been included most over the years. Of the 578 unique artists, only 65 (11%) have had one of their songs included more than once in FIFA, which to me is great! I personally enjoy that EA Sports includes various artists because it allows me to explore artists that I may have not encountered on my own. Below you can use the table to search through all the artists and see how many times they have been included.
 
 ```{r count_track_tbl, echo=FALSE}
 #Top 25 featured artists
@@ -124,7 +124,7 @@ fifa_playlist %>%
   rename(Artist = artist_name,
          `Number of tracks` = n) %>% 
   arrange(desc(`Number of tracks`)) %>% 
-  datatable(caption = "Number of times an Artist has been included in FIFA")
+  datatable(caption = "Number of Times An Artist Has Been Included in FIFA")
 ```
 
 #Exploring the tracks

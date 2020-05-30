@@ -20,9 +20,6 @@ fifa_playlist <- read_csv("fifa_music.csv") %>%
   summarise() %>% 
   ungroup()
 
-fifa_playlist %>% 
-  count(year)
-
 
 track_info <- function(artist, title) {
   
@@ -60,10 +57,6 @@ combining_data_set <- function(min_track, max_track){
   return(fifa_music_attributes)
   
 }
-
-
-font_import('EA Font v1.5 by Ghettoshark')
-
 
 
 fifa_music_attributes1 <- combining_data_set(1, 100)
