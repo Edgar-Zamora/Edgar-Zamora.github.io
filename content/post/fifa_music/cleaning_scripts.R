@@ -69,23 +69,26 @@ fifa_music_attributes7 <- combining_data_set(601, 664)
 
 
 
-zzz <- rbind(fifa_music_attributes1, fifa_music_attributes2, fifa_music_attributes3, fifa_music_attributes4, fifa_music_attributes5, fifa_music_attributes6,
+complete_fifa_music <- rbind(fifa_music_attributes1, fifa_music_attributes2, fifa_music_attributes3, fifa_music_attributes4, fifa_music_attributes5, fifa_music_attributes6,
              fifa_music_attributes7)
 
-#There might be more observations than the total becuase some tracks have two observations which will be rememided through averaging both tracks
-www <- zzz %>% 
+#There might be more observations than the total becuase some tracks have two 
+#observations which will be rememided through averaging both tracks
+
+fifa_music_unnested <- complete_fifa_music %>% 
   unnest(output) %>% 
   mutate(error = if_else(is.na(output), "error", "none")) %>% 
   slice(seq(1, n(), by = 2)) %>% 
   rename(artist_name.x = artist_name,
          track_name.y = track_name) %>% 
-  unnest(output)
+  filter(error != "error") %>% #removing those tracks not found in the Spotify API (90)
+  mutate(row_nums = map_dbl(output, nrow)) %>% 
+  filter(row_nums > 0 ) %>% #removing those tracks that did not return attributes when though there was an error (253)
+  unnest(cols = c(output))
 
 
-www
-
-
-vvv <- www %>% 
+#Averaging those tracks that have differing attributes.
+fifa_music_averaged <- fifa_music_unnested %>% 
   group_by(artist_name.x, track_name.y, year) %>% 
   #print(n = Inf)
   summarise(
@@ -101,21 +104,9 @@ vvv <- www %>%
     duration_ms = mean(duration_ms)) %>%
   ungroup()
 
-
-vvv %>% 
-  filter(!is.na(artist_name)) %>% 
-  ungroup() %>% 
-  ggplot(aes(year, danceability)) + 
-  geom_boxplot() +
-  geom_point(alpha = .2) +
-  #scale_y_continuous(limits = c(0, 1)) +
-  theme(
-    panel.grid.major = element_blank(),
-    panel.background = element_blank())
+#Writing file
+write_csv(fifa_music_averaged, "fifa_music_cleaned.csv")
 
 
-options(max.print=1000000)
-font_import()
-fonttable()
 
 
