@@ -13,9 +13,9 @@ description: 'In this article I explore various attributes about each track from
 image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
 ---
 
-Anyone who has played *FIFA* has experienced every type of emotion ranging from anger after loosing that ranked match or pure bliss from winning a game against your older cousin in stoppage time. Whatever emotion that *FIFA* may engender from you, we keep coming back year after year to enjoy a game that offers more than just football (soccer). Over the years my reason for coming back to FIFA has grown from just being mostly about the game itself (game modes, new players, etc.) to now including the music that is used throughout. I strongly believe that through *FIFA* I have been able to experience new generes of music that otherwise may have not or taken long to enter my life.
+Anyone who has played *FIFA* has experienced every type of emotion ranging from anger after loosing that ranked match or pure bliss from winning a game against your older cousin in stoppage time. Whatever emotion that *FIFA* may engender from you, we keep coming back year after year to enjoy a game that offers more than just football (soccer). Over the years my reason for coming back to FIFA has grown from just being mostly about the game itself (game modes, new players, etc.) to now including the music that is used throughout. I strongly believe that through *FIFA* I have been able to experience new genres of music that otherwise may have not or taken long to enter my life.
 
-My decision to write about how *FIFA* has changed and/or contributed to peoples musical preference is not new. I came across a Vice [article](https://www.vice.com/en_us/article/9k3jga/how-fifa-games-changed-our-tastes-in-music) that analyzes *FIFA* music starting with *FIFA* 99 up to *FIFA* 18. The article does an excllent describing the progess of what the music was and how it has changed into today's incarnation. Additional discussions of the impact of *FIFA*'s music choices can been seen on a [reddit](https://www.reddit.com/r/FIFA/comments/7nnx6f/fifa_music_should_be_considered_its_own_genre/) forum that explores whether *FIFA* music should be considered its own genre. 
+My decision to write about how *FIFA* has changed and/or contributed to peoples musical preference is not new. I came across a Vice [article](https://www.vice.com/en_us/article/9k3jga/how-fifa-games-changed-our-tastes-in-music) that analyzes *FIFA* music starting with *FIFA* 99 up to *FIFA* 18. The article does an excellent describing the progress of what the music was and how it has changed into today's incarnation. Additional discussions of the impact of *FIFA*'s music choices can been seen on a [reddit](https://www.reddit.com/r/FIFA/comments/7nnx6f/fifa_music_should_be_considered_its_own_genre/) forum that explores whether *FIFA* music should be considered its own genre. 
 
 There certainly are other pieces that offer similar type of analysis but what I feel is missing is an analysis that specifically looks at the features of each track. In this article I will visualize different features of each *FIFA* track including, but not limited to, energy, loudness, and other features. To do so I will be using the `spotifyr` package by Charlie Thompson, Josiah Parry, Donal Phipps, and Tom Wolff which is an "R wrapper for pulling track audio features and other information from Spotify’s Web API in bulk.". 
 
@@ -33,11 +33,16 @@ library(ggtext)
 library(DT)
 library(ggimage)
 library(extrafont)
+library(GGally)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 #Cleaning dataset with list of songs
-fifa_playlist <- read_csv("fifa_music_cleaned.csv")
+raw_fifa_playlist <- read_csv("fifa_music.csv") %>% 
+  mutate(year = as.factor(year))
+
+fifa_playlist <- read_csv("fifa_music_cleaned.csv") %>% 
+  mutate(year = as.factor(year))
 
 #Importing FIFA font
 #font_import('EA Font v1.5 by Ghettoshark')
@@ -53,6 +58,7 @@ library(ggtext)
 library(DT)
 library(ggimage)
 library(extrafont)
+library(GGally)
 
 Sys.setenv(SPOTIFY_CLIENT_ID = 'your_client_id')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = 'your_client_secret')
@@ -64,7 +70,7 @@ For a detailed walk through I would recommend reading the [documention](https://
 
 # Data
 
-To access the dataset, you can visit my [GitHub](https://github.com/Edgar-Zamora/Edgar-Zamora.github.io/tree/master/content/post/fifa_music) where I have the script and data that you can use if you would like to conduct your own analysis. In total there were 664 tracks for all *FIFA* games starting from 2002. I start at 2002 because the games before this included fewer than 10 songs which would have not been that insightful. After joining the list of tracks with the Spotify API using the `spotifyr` package, there were a total of 411 tracks that had features. I encountered trouble when trying to separate the result and error of my `map2` function. I listened to and followed Dani Chu's 2019 RStudio Conference [presentation](https://docs.google.com/presentation/d/1P9iT_TQUoxxCyvkfCLe5Y-9xBWpHh7btlP2mQ3XyNOM/edit#slide=id.g54c124210e_0_0) to aid in solving this issue. Though all the issues were not resolved it did keep me sane while having attempted it on my own. In the future I intend to go back and get a more complete list of tracks but for now I believe the current dataset should work.
+To access the dataset, you can visit my [GitHub](https://github.com/Edgar-Zamora/Edgar-Zamora.github.io/tree/master/content/post/fifa_music) where I have the script and data that you can use if you would like to conduct your own analysis. In total there were 664 tracks for all *FIFA* games starting from 2002. I start at 2002 because the games before this included fewer than 10 songs which would have not been that insightful. After joining the list of tracks with the Spotify API using the `spotifyr` package, there were a total of 4321 tracks that had features. I encountered trouble when trying to separate the result and error of my `map2` function. I listened to and followed Dani Chu's 2019 RStudio Conference [presentation](https://docs.google.com/presentation/d/1P9iT_TQUoxxCyvkfCLe5Y-9xBWpHh7btlP2mQ3XyNOM/edit#slide=id.g54c124210e_0_0) to aid in solving this issue. Though all the issues were not resolved it did keep me sane while having attempted it on my own. In the future I intend to go back and get a more complete list of tracks but for now I believe the current dataset should work.
 
 
 Below delving into the attributes of the tracks, it would be interesting to see how the volume of tracks have changed over the years. In the figure below, we can see that the number of tracks included in each version of *FIFA* has fluctuated over time with the highest being with *FIFA* 17 and the lowest with *FIFA* 13 with an average of 36 tracks per game. *FIFA* 20 is not included in this data set because with the introduction of the new game mode, [Volta](https://www.goal.com/en-us/news/fifa-20-volta-what-is-the-new-5-a-side-mode-how-is-it/13tbwqka87rab12rw9noitdpzt), it pushes the playlist to over 100 tracks. If we only consider the menu tracks its stays in mirrors the total of *FIFA* 19 with 43 total tracks.
@@ -72,7 +78,7 @@ Below delving into the attributes of the tracks, it would be interesting to see 
 ```{r tracks_per_yr, echo=FALSE, fig.align='center', fig.height=8, fig.width=10}
 #General Overview
 #Number of trackers per game
-fifa_playlist %>% 
+raw_fifa_playlist %>% 
   count(year) %>% 
   ggplot(aes(year, n)) +
   geom_rect(xmin = 0, xmax = 3.166667, ymin = 0, ymax = 53, fill = "#5b8b32", alpha = .1) +
@@ -81,8 +87,9 @@ fifa_playlist %>%
   geom_rect(xmin = 9.500003, xmax = 12.66667, ymin = 0, ymax = 53, fill = "#4a6f28", alpha = .1) +
   geom_rect(xmin = 12.66668, xmax = 15.83335, ymin = 0, ymax = 53, fill = "#5b8b32", alpha = .1) +
   geom_rect(xmin = 15.83336, xmax = 19, ymin = 0, ymax = 53, fill = "#4a6f28", alpha = .1) +
+  geom_rect(xmin = 19.00001, xmax = 22, ymin = 0, ymax = 53, fill = "#5b8b32", alpha = .1) +
   geom_line(aes(group = 1), colour = "#b6b3b3", linetype = "dashed", alpha =  .4) +
-  geom_point(size = 16, colour = "white") +
+  geom_point(size = 15, colour = "white") +
   geom_text(aes(label = n), colour = "black", size = 6.5, family = "EA Font v1.5 by Ghettoshark") +
   labs(
     y = NULL,
@@ -96,6 +103,7 @@ fifa_playlist %>%
     axis.text.x = element_text(size = 12, colour = "black", family = "EA Font v1.5 by Ghettoshark"),
     plot.title = element_markdown(size = 28, family = "EA Font v1.5 by Ghettoshark", face = "plain")
   )
+
 ```
 
 
@@ -103,21 +111,176 @@ In addition to knowing which edition has the most tracks, it is cool to know whi
 
 ```{r count_track_tbl, echo=FALSE}
 #Top 25 featured artists
-fifa_playlist %>% 
-  count(artist_name.x) %>%
-  rename(Artist = artist_name.x,
+raw_fifa_playlist %>% 
+  count(artist) %>%
+  rename(Artist = artist,
          `Number of tracks` = n) %>% 
   arrange(desc(`Number of tracks`)) %>% 
   datatable(caption = "Number of Times An Artist Has Been Included in FIFA")
 ```
 
-#Exploring the tracks
 
-```{r}
+# Exploring the tracks
 
+To get a better understanding of the relationships between each of the tracks' attributes I use the `ggpairs()` function from the `GGally` package. Using the `ggpairs()` function visualizations each variable against another. In the graphic below it mostly consists of either a density or plot chart but there is potential for other graphics to be chosen. 
+
+
+```{r ggpairs, fig.width=10, fig.height=9}
+fifa_playlist %>% 
+  select(danceability:valence) %>%
+  ggpairs()
 ```
 
+The figure above provides some detail into the attributes of music found in *FIFA*. An interesting feature about the tracks are their propensity to be of higher energy which [according to Spotify](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/) means that tracks typically feel fast, loud, and noisy. Additionally most tracks included in *FIFA* are more included to have negative loudness which is not surprising given the energy feature and also the positive correlation (.589) between both features. A feature that I would have appeared more in the tracks was valence, which is described as a tracks positiveness or negativeness. From the density plot on valence we can see most tracks are likely to be middle of the road when it comes to positiveness. Along similar lines is the danceability feature, which portrays a similar pattern in being middle of the road. 
 
+For the rest of this post I will focus on these four features: loudness, energy, and valence. There is no scientific decision behind my selection, rather I feel these attributes are what I feel encompass the music of *FIFA*. A track this uplifting, energetic and likely to get you screaming the lyrics in your home, which my cats sometimes stare at me for. 
+
+# Loudness
+
+Loudness is defined as "the overall loudness of a track in decibels (dB)" averaged over the entire track with values typically ranging from -60 to 0. For reference, 0 dB is the threshold for human hearing ability and that values that negative a tad bit softer. With that riveting discussion of decibels out of the way, we ca now look at whether the decibels among tracks varies by the release year of *FIFA*.
+
+```{r}
+fifa_playlist %>% 
+  filter(year != "2002") %>% 
+  select(year, loudness) %>% 
+  ggplot(aes(loudness)) +
+  geom_density( data = function(x) select(x, -year), colour = "#d4d2c9", size = .5) +
+  geom_density(aes(colour = year), size = 1) +
+  facet_wrap(~year) +
+  scale_colour_discrete(name = "FIFA Series") +
+  labs(
+    x = "Loudness",
+    y = "Density",
+    title = "Overall Track Loudness As Compared to Each Year"
+    ) +
+  theme(
+    plot.title = element_text(family = "EA Font v1.5 by Ghettoshark", size = 16), 
+    legend.position = "bottom",
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "black"),
+    strip.background = element_blank(),
+    axis.ticks = element_blank()
+    ) +
+  guides(col = guide_legend(nrow = 2, byrow = TRUE))
+```
+
+Overall, the distribution of loudness of each *FIFA* game tends to mostly align with the average distribution, which is the white line. *FIFA* 2007 was an interesting year as it had more songs that were of higher loudness as compared to other years. At first I thought it could have been a result of the number of tracks that are in the game, but there are only 18 viable tracks which is not the largest. 
+
+Looking at the relationship between the loudness and energy of *FIFA* tracks we can see that most tracks are clustered in the upper quadrant meaning tracks are certainly higher in energy with a more moderate level of loudness compared to the standard of zero. 
+
+```{r loudness_energy}
+fifa_playlist %>% 
+  ggplot(aes(loudness, energy)) +
+  geom_smooth(se = FALSE) +
+  geom_point(aes(colour = year), alpha = .6, size = 3) +
+  labs(
+    x = "Loudness",
+    y = "Energy",
+    title = "Relationship Between Loudness and Energy of *FIFA* Tracks"
+  ) +
+  scale_colour_discrete(name = "FIFA Series") +
+  scale_y_continuous(limits = c(.25, 1),
+                     breaks = seq(.25, 1, by = .25)) +
+  theme(
+    plot.title = element_text(family = "EA Font v1.5 by Ghettoshark", size = 14), 
+    legend.position = "bottom",
+    legend.key = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_text(size = 10, colour = "black")
+  ) +
+  guides(col = guide_legend(nrow = 3, byrow = TRUE))
+```
+
+Based on my personal experience I would have not expected such a relationship, I certainly would have said that *FIFA* tracks are energetic but was surprised with the decreasing loudness as energy went up. 
+
+# Energy
+
+I think the attribute of energy is what I feel best describes a song that is likely to be included in *FIFA*. The reason I say is that while playing I want pacey music to match the speed at which I destroy Manchester United (I am a Manchester City supporter).
+
+```{r energy}
+fifa_playlist %>% 
+  filter(year != "2002") %>% 
+  ggplot(aes(year, energy, colour = year)) +
+  geom_point(alpha = .2, show.legend = FALSE) +
+  geom_jitter(width = .15, show.legend = FALSE) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(
+    x = "FIFA Series",
+    y = "Energy",
+    title = "Energy of Each *FIFA* Game Over the Years"
+  ) +
+  theme(
+    plot.title = element_text(family = "EA Font v1.5 by Ghettoshark", size = 14), 
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_text(size = 10, colour = "black")
+  )
+```
+
+In the box plots above you can see that for all *FIFA* games, the median energy lie above .75, making most tracks have a more fast, loud, and noisy feel. With *FIFA* 16 being my favorite track list, it ranges above middle of the road as compared to the rest. In trying to see if there is a pattern to the distribution, kinda of see that every couple of years the median drops. This could be a strategy of EA Sports to give the game a new twist or direction that may compliment new game modes like The Journey, Champions League, or Ultimate Team. 
+# Valence
+
+Valence measures the musical positiveness with higher tracks being more positive (e.g. happy, cheerful, euphoric), while tracks with lower valence as negative (e.g. sad, depressed, angry). Based on my experience, I would certainly describe *FIFA* tracks as being positive in nature. I say that because playing football is something that is joyful and can bring happiness in many forms so the tracks that are included in the game should create a similar mood.
+
+```{r valence}
+fifa_playlist %>% 
+  filter(year != "2002") %>% 
+  select(year, loudness) %>% 
+  ggplot(aes(loudness)) +
+  geom_density( data = function(x) select(x, -year), colour = "#d4d2c9", size = .5) +
+  geom_density(aes(colour = year), size = 1) +
+  facet_wrap(~year) +
+  scale_colour_discrete(name = "FIFA Series") +
+  labs(
+    x = "Loudness",
+    y = "Density",
+    title = "Overall Track Loudness As Compared to Each Year"
+    ) +
+  theme(
+    plot.title = element_text(family = "EA Font v1.5 by Ghettoshark", size = 16), 
+    legend.position = "bottom",
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "black"),
+    strip.background = element_blank(),
+    axis.ticks = element_blank()
+    ) +
+  guides(col = guide_legend(nrow = 2, byrow = TRUE))
+```
+
+Looking at the overall valence, white line, we can see that there is not a propensity for the valence of the tracks to be distributed within a certain range. I certainly thought there would be a negative skew with most tracks having a higher valence. As was seen with loudness, *FIFA* 2007 is ahead of other years in terms of having tracks that are more positive. *FIFA* 2015 is interesting because if you are person who wants music that is middle of the road that is neither positive nor negative than this year would be best because of its propensity to have tracks that are neutral (.5 valence). *FIFA* 2003 was the year in which most tracks were regarded as negative which I thought wound not appear in a *FIFA* tracks. 
+
+
+```{r valence_danceabilty}
+fifa_playlist %>% 
+  ggplot(aes(valence, danceability)) +
+  geom_smooth(se = FALSE) +
+  geom_point(aes(colour = year), size = 3, alpha = .6) +
+  labs(
+    x = "Valence",
+    y = "Danceability",
+    title = "Relationship Between Loudness and Energy of FIFA Tracks"
+  ) +
+  scale_y_continuous(limits = c(0, 1)) +
+  scale_colour_discrete(name = "FIFA Series") +
+  theme(
+    plot.title = element_markdown(size = 14, family = "EA Font v1.5 by Ghettoshark", face = "plain"),
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "bottom",
+    legend.key = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  guides(col = guide_legend(nrow = 2, byrow = TRUE))
+```
+
+Additionally, there seems to be a relationship between the valence of a track and its danceability. According to Spotify, danceability is how suitable a track is for dancing based on a "combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity". The expected relationship would be positive because I would not want to dance during somber moments so why would I do it while listing to somber music. In the figure above you see that relationship
+
+# Conclusion
+
+Whether you are here for the *FIFA* content, R language, or for both, I hope that you have found this post somewhat helpful. Having just scratched the surface on what lies within the tracks of *FIFA*, I encourage you to use my dataset, or build your own and continue to explore, which I know I will be doing. The post focused on explaining how *FIFA* tracks has influenced my life outside of football. Through playing *FIFA* I have expanded my preference of music from mostly consisting of Hip-Hop, Rap, and Mexican musical to now including other genres like Indie rock or pop and other similar genres. Specially, *FIFA* has introduced me to artists like Jon Bellion, Cuco, Matt and Kim, Passion Pit, Galantis, Purple Disco Machine, and others.
 
 
 
