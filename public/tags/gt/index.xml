@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gt on Edgar Zamora</title>
+    <link>/tags/gt/</link>
+    <description>Recent content in gt on Edgar Zamora</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/gt/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using the {gt} package to visualize Bad Bunny</title>
+      <link>/2020/12/28/using-gt-package-to-visualize-bad-bunny/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/12/28/using-gt-package-to-visualize-bad-bunny/</guid>
+      <description>Bad Bunny :rabbit:  Retrieving the data :cd: To explore some of the features present in Bad Bunny’s music, I use the spotifyr package which is an R wrapper for pulling track audio features and other information from Spotify’s Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account.</description>
+    </item>
+    
+  </channel>
+</rss>

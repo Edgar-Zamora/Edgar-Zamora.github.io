@@ -1,24 +1,3 @@
----
-title: Using the {gt} package to visualize Bad Bunny
-author: Edgar Zamora
-date: '2020-12-28'
-slug: using-gt-package-to-visualize-bad-bunny
-categories: []
-tags:
-  - gt
-subtitle: ''
-description: ''
-image: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
----
-
-
-# Bad Bunny :rabbit:
-
-# Retrieving the data :cd:
-
-To explore some of the features present in Bad Bunny's music, I use the `spotifyr` [package](https://github.com/charlie86/spotifyr) which is an R wrapper for pulling track audio features and other information from Spotify's Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account. To create Spotify developer account you can go to their their [dashboard](https://developer.spotify.com/dashboard/). After logging in you will need to "create an app" which will provide you with a **Client ID** and **Client Secret** which important in setting up a connection to the API. After doing that you will have to save those tokens as an object as so:
-
-```{r include=FALSE}
 library(tidyverse)
 library(spotifyr)
 library(knitr)
@@ -26,40 +5,16 @@ library(ggtext)
 library(gt)
 library(glue)
 library(extrafont)
-library(rmarkdown)
-library(blogdown)
 
-bad_bunny_compl_track <- read_csv("data/bad_bunny.csv") %>% 
-  select(-X1)
-```
-
-
-```{r spotify_token, eval=FALSE}
-library(tidyverse)
-library(spotifyr)
-library(knitr)
-library(ggtext)
-library(gt)
-library(glue)
-library(extrafont)
-library(rmarkdown)
-
-Sys.setenv(SPOTIFY_CLIENT_ID = 'your_client_id')
-Sys.setenv(SPOTIFY_CLIENT_SECRET = 'your_client_secret')
+# --------------------------------------------------------------
+#https://developer.spotify.com/dashboard/
+Sys.setenv(SPOTIFY_CLIENT_ID = '#######')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = '########')
 
 access_token <- get_spotify_access_token()
 
-```
 
-Once you have done that you are all ready to go!!
-
-## Track features and popularity
-
-The `spotifyr` package offers a lot of functions when it comes to accessing information from the Spotify Web API of which can not all be covered in this post so I encourage y'all to explore it further. For this post we will cover the `get_artist_audio_features()` function which retrieves a list of all the features for a track from a given artist. Note that this excludes singles that may have garnered a lot of attention that are later put into the full released album. In the case of Bad Bunny, Callaíta and Dakiti and received a lot of praise with the latter being include in an album.
-
-To be able to extrapolate to other artists, I decided to put use the `get_artist_audio_features()` function within my own function, `track_info()`, to retrieve audio features for artists. If the `get_artist_audio_features()` function is only used be aware that the function does not return results as a tibble.
-
-```{r track_info, warning=FALSE, message=FALSE, eval=FALSE}
+# --------------------------------------------------------------
 track_info <- function(artist) {
   
   track_data <- get_artist_audio_features({{artist}}) %>%
@@ -71,11 +26,7 @@ track_info <- function(artist) {
 
 
 bad_bunny_tracks <- track_info("Bad Bunny")
-```
 
-After retrieving the audio features for each of Bad Bunny's tracks, I proceed to get the popularity of each track based on Spotify's algorithm. To be able to get the popularity of a track we need each track unique id which is provided to us. Using the `pluck()` function we can, pluck lol, the id of each track to feed into the function that we create below. Similar to the custom made `track_info()` function, we create a `track_popularity()` function with the `get_track()` function from `spotifyr` as the core function.
-
-```{r track_popularity, eval=FALSE}
 
 track_ids <- bad_bunny_tracks %>% 
   pull(track_id)
@@ -93,13 +44,9 @@ track_popularity <- function(track_id) {
 
 track_popularity <- map_df(track_ids, track_popularity)
 
-```
 
-To retrieve the actual popularity ratings we use the `map_df()` from the `purrr` package to iterate each track id through the `track_popularity` function with the final object being stored as a data frame. Again we decide to take this functional approach to allow other to apply the same methodology to other artists.
+# --------------------------------------------------------------
 
-After having run the code above, we are left with a lot of tracks with not a lot of space to visualize it. For these reasons, we decide that it would be appropriate to choose the top 10 most popular Bad Bunny tracks, which is what is done below.
-
-```{r complete_data, eval=FALSE}
 bad_bunny_compl_track <- bad_bunny_tracks %>%
   left_join(track_popularity, by = "track_id") %>% 
   mutate(track_name = case_when(track_name == "LA CANCIÓN" ~ "LA CANCION",
@@ -107,7 +54,6 @@ bad_bunny_compl_track <- bad_bunny_tracks %>%
                                 track_name == "La Difícil" ~ "La Dificil",
                                 track_name == "Si Estuviésemos Juntos" ~ "	Si Estuviesemos Juntos",
                                 track_name == "CANCIÓN CON YANDEL" ~ "CANCION CON YANDEL",
-                                track_name == "DÁKITI" ~ "Dakiti",
                    TRUE ~ track_name)) %>%
   unnest(album_images) %>%
   distinct(track_name, url, track_preview_url, valence, danceability, energy, popularity) %>% 
@@ -118,18 +64,13 @@ bad_bunny_compl_track <- bad_bunny_tracks %>%
   slice(1:10) %>% 
   mutate(track_preview_url = glue('<audio controlsList="nodownload" controls src="{track_preview_url}"></audio>')) %>%
   select(url, track_name, popularity, danceability, valence, energy,  track_preview_url)
-```
 
-When we originally retrieved the Spotify data, you may have noticed two really cool features, album image and track preview url. These two features are usually available for each track and we will be using them in the `gt` table.
 
-# Building a `{gt}` table
+# --------------------------------------------------------------
 
-```{r gt_tbl, echo=FALSE, fig.width=10}
+write.csv(bad_bunny_compl_track, "data/bad_bunny.csv")
 
-max_dance_row <- which.max(bad_bunny_compl_track$danceability)
-max_energy_row <- which.max(bad_bunny_compl_track$energy)
-max_valence_row <- which.max(bad_bunny_compl_track$valence)
-
+# --------------------------------------------------------------
 
 bad_bunny_compl_track %>% 
   gt() %>% 
@@ -171,7 +112,7 @@ bad_bunny_compl_track %>%
   tab_style(
     style = cell_text(
       font = "Colors Of Autumn", #https://www.dafont.com/colors-of-autumn.font
-      size = px(18)),
+      size = px(20)),
     locations = cells_body(vars(track_name))
   ) %>% 
   tab_style(
@@ -201,10 +142,15 @@ bad_bunny_compl_track %>%
       size = px(20)
     ),
     locations = list(
-      cells_body(columns = c(4), rows = as.numeric(max_dance_row)),
-      cells_body(columns = c(5), rows = as.numeric(max_valence_row)),
-      cells_body(columns = c(6), rows =as.numeric(max_energy_row))
+      cells_body(columns=c(4), rows=c(6)),
+      cells_body(columns=c(5), rows=c(5)),
+      cells_body(columns=c(6), rows=c(8))
     )) %>% 
+  cols_width(
+    vars(track_name) ~ px(300),
+    vars(track_preview_url) ~ px(350),
+    vars(url, popularity, danceability, energy, valence) ~ px(120)
+  )  %>% 
   tab_style(
     style = list(
       cell_borders(
@@ -233,7 +179,7 @@ bad_bunny_compl_track %>%
       columns = vars(energy))
   ) %>% 
   tab_footnote(
-    footnote = md("**Valence** describes the positiveness conveyed by a track. high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low <br>valence sound more negative (e.g. sad, depressed, angry)"),
+    footnote = md("**Valence** describes the positiveness conveyed by a track. high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)"),
     locations = cells_column_labels(
       columns = vars(valence))
   ) %>% 
@@ -242,8 +188,7 @@ bad_bunny_compl_track %>%
     table.border.bottom.color = "white",
     table.border.bottom.width = px(3),
     data_row.padding = px(7),
-    footnotes.font.size = px(10),
-    table.width = pct(50)
+    footnotes.font.size = px(10)
   ) %>% 
   tab_source_note(source_note = md("**Data**: Spotify Web API")) %>% 
   data_color(
@@ -253,11 +198,8 @@ bad_bunny_compl_track %>%
       palette = c('#fbeb04', '#f1d324', '#e5bd30', '#d7a739', '#23a6e1'),
       domain = NULL
     )
-  ) %>% 
-  cols_width(
-    vars(track_name) ~ px(250),
-    vars(track_preview_url) ~ px(180),
-    vars(popularity, energy, valence) ~ px(95),
-    vars(url, danceability) ~ px(100)
   )
-```
+
+
+
+  
