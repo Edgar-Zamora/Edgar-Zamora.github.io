@@ -202,6 +202,7 @@
 
                 
                 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>At my work we often create visualizations that look very similar but have slight differences when it comes to aesthetics, axis limits, labels, and other attributes. However, with most visualizations in R, they all mostly have a similar structure, which is a great benefit of using <code>ggplot</code>. What I would traditionally do is reuse code for one visualization for another simply by copying and pasting, but as is commonly emphasized in data science, one should avoid copying and pasting more than two lines of code. For that reason I decided to turn my code into a function that could reuse code without the need for copying and pasting. Additionally, I use the <code>purrr</code> package to make the process quicker and more efficient.</p>
@@ -265,7 +266,7 @@ library(knitr)</code></pre>
 <p>If you take a look at the code for both graphics from above, you can spot three differences:</p>
 <ol style="list-style-type: decimal">
 <li><p>The first variable in the <code>count()</code> function is different, in that one variable is “cyl” and the other is “class”.</p></li>
-<li>The variable in the ggplot aesthetic also varies in the same way that the <code>count()</code> function did.</li>
+<li><p>The variable in the ggplot aesthetic also varies in the same way that the <code>count()</code> function did.</p></li>
 <li><p>The x-axis labels are different in that one references the “Number of Cylinders” while the other references “Vehicle Class”.</p></li>
 </ol>
 <p>Knowing that these are the only differences among both graphics, we can instruct the function to change according to those arguments. <strong>Note</strong> for this to work you should have the latest `rlang’ version installed.</p>
