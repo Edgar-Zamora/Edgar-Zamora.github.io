@@ -6,19 +6,20 @@ slug: using-gt-package-to-visualize-bad-bunny
 categories: []
 tags:
   - gt
+  - spotifyr
 subtitle: ''
-description: ''
-image: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
+description: "Bad Bunny has arguably been one of the best artist in 2020. With the release of three ablums, his music has provided many solace during a dramatic year. In this post we explore some of Bad Bunny's top hits by building a table using the {gt} package and the Spotify Web API. "
+image: 'https://images.unsplash.com/photo-1478147427282-58a87a120781?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<div id="bad-bunny-rabbit" class="section level1">
-<h1>Bad Bunny :rabbit:</h1>
+<div id="bad-bunny" class="section level1">
+<h1>Bad Bunny 🐰</h1>
 </div>
-<div id="retrieving-the-data-cd" class="section level1">
-<h1>Retrieving the data :cd:</h1>
+<div id="retrieving-the-data" class="section level1">
+<h1>Retrieving the data 💿</h1>
 <p>To explore some of the features present in Bad Bunny’s music, I use the <code>spotifyr</code> <a href="https://github.com/charlie86/spotifyr">package</a> which is an R wrapper for pulling track audio features and other information from Spotify’s Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account. To create Spotify developer account you can go to their their <a href="https://developer.spotify.com/dashboard/">dashboard</a>. After logging in you will need to “create an app” which will provide you with a <strong>Client ID</strong> and <strong>Client Secret</strong> which important in setting up a connection to the API. After doing that you will have to save those tokens as an object as so:</p>
 <pre class="r"><code>library(tidyverse)
 library(spotifyr)
@@ -90,11 +91,13 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
 </div>
 <div id="building-a-gt-table" class="section level1">
 <h1>Building a <code>{gt}</code> table</h1>
+<div id="starting-from-stratch" class="section level2">
+<h2>Starting from stratch</h2>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#irssoxolwc .gt_table {
+#zyvguecwia .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -117,7 +120,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_heading {
+#zyvguecwia .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -129,7 +132,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_title {
+#zyvguecwia .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -139,7 +142,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-bottom-width: 0;
 }
 
-#irssoxolwc .gt_subtitle {
+#zyvguecwia .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -149,13 +152,13 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-width: 0;
 }
 
-#irssoxolwc .gt_bottom_border {
+#zyvguecwia .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_col_headings {
+#zyvguecwia .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -170,7 +173,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_col_heading {
+#zyvguecwia .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -190,7 +193,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   overflow-x: hidden;
 }
 
-#irssoxolwc .gt_column_spanner_outer {
+#zyvguecwia .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -202,15 +205,15 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 4px;
 }
 
-#irssoxolwc .gt_column_spanner_outer:first-child {
+#zyvguecwia .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#irssoxolwc .gt_column_spanner_outer:last-child {
+#zyvguecwia .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#irssoxolwc .gt_column_spanner {
+#zyvguecwia .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -222,7 +225,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   width: 100%;
 }
 
-#irssoxolwc .gt_group_heading {
+#zyvguecwia .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -244,7 +247,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   vertical-align: middle;
 }
 
-#irssoxolwc .gt_empty_group_heading {
+#zyvguecwia .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -259,19 +262,19 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   vertical-align: middle;
 }
 
-#irssoxolwc .gt_striped {
+#zyvguecwia .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#irssoxolwc .gt_from_md > :first-child {
+#zyvguecwia .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#irssoxolwc .gt_from_md > :last-child {
+#zyvguecwia .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#irssoxolwc .gt_row {
+#zyvguecwia .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -290,7 +293,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   overflow-x: hidden;
 }
 
-#irssoxolwc .gt_stub {
+#zyvguecwia .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -302,7 +305,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-left: 12px;
 }
 
-#irssoxolwc .gt_summary_row {
+#zyvguecwia .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -312,7 +315,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 5px;
 }
 
-#irssoxolwc .gt_first_summary_row {
+#zyvguecwia .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -322,7 +325,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_grand_summary_row {
+#zyvguecwia .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -332,7 +335,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 5px;
 }
 
-#irssoxolwc .gt_first_grand_summary_row {
+#zyvguecwia .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -342,7 +345,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_table_body {
+#zyvguecwia .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -351,7 +354,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_footnotes {
+#zyvguecwia .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -365,13 +368,13 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_footnote {
+#zyvguecwia .gt_footnote {
   margin: 0px;
   font-size: 10px;
   padding: 4px;
 }
 
-#irssoxolwc .gt_sourcenotes {
+#zyvguecwia .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -385,46 +388,46 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#irssoxolwc .gt_sourcenote {
+#zyvguecwia .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#irssoxolwc .gt_left {
+#zyvguecwia .gt_left {
   text-align: left;
 }
 
-#irssoxolwc .gt_center {
+#zyvguecwia .gt_center {
   text-align: center;
 }
 
-#irssoxolwc .gt_right {
+#zyvguecwia .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#irssoxolwc .gt_font_normal {
+#zyvguecwia .gt_font_normal {
   font-weight: normal;
 }
 
-#irssoxolwc .gt_font_bold {
+#zyvguecwia .gt_font_bold {
   font-weight: bold;
 }
 
-#irssoxolwc .gt_font_italic {
+#zyvguecwia .gt_font_italic {
   font-style: italic;
 }
 
-#irssoxolwc .gt_super {
+#zyvguecwia .gt_super {
   font-size: 65%;
 }
 
-#irssoxolwc .gt_footnote_marks {
+#zyvguecwia .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="irssoxolwc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table" style="table-layout: fixed; width: 915px">
+<div id="zyvguecwia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table" style="table-layout: fixed; width: 915px">
   <colgroup>
     <col style="width: 100px"/>
     <col style="width: 250px"/>
@@ -604,4 +607,11 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
   </tfoot>
 </table></div>
+</div>
+<div id="lets-get-fancy" class="section level2">
+<h2>Lets get fancy</h2>
+</div>
+<div id="oh-now-thats-boujee" class="section level2">
+<h2>Oh now that’s boujee</h2>
+</div>
 </div>

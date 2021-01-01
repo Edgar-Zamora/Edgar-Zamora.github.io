@@ -6,15 +6,15 @@ slug: using-gt-package-to-visualize-bad-bunny
 categories: []
 tags:
   - gt
+  - spotifyr
 subtitle: ''
-description: ''
-image: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80'
+description: "Bad Bunny has arguably been one of the best artist in 2020. With the release of three ablums, his music has provided many solace during a dramatic year. In this post we explore some of Bad Bunny's top hits by building a table using the {gt} package and the Spotify Web API. "
+image: 'https://images.unsplash.com/photo-1478147427282-58a87a120781?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
 ---
 
+# Bad Bunny 🐰
 
-# Bad Bunny :rabbit:
-
-# Retrieving the data :cd:
+# Retrieving the data 💿
 
 To explore some of the features present in Bad Bunny's music, I use the `spotifyr` [package](https://github.com/charlie86/spotifyr) which is an R wrapper for pulling track audio features and other information from Spotify's Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account. To create Spotify developer account you can go to their their [dashboard](https://developer.spotify.com/dashboard/). After logging in you will need to "create an app" which will provide you with a **Client ID** and **Client Secret** which important in setting up a connection to the API. After doing that you will have to save those tokens as an object as so:
 
@@ -123,6 +123,8 @@ bad_bunny_compl_track <- bad_bunny_tracks %>%
 When we originally retrieved the Spotify data, you may have noticed two really cool features, album image and track preview url. These two features are usually available for each track and we will be using them in the `gt` table.
 
 # Building a `{gt}` table
+
+## Starting from stratch
 
 ```{r gt_tbl, echo=FALSE, fig.width=10}
 
@@ -261,3 +263,9 @@ bad_bunny_compl_track %>%
     vars(url, danceability) ~ px(100)
   )
 ```
+
+## Lets get fancy
+
+
+## Oh now that's boujee
+

@@ -6,9 +6,14 @@ googleAnalytics = "UA-159054948-1"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-
 [params]
-  header_image = "https://images.unsplash.com/photo-1540745291638-2c71059043e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+  header_image = "https://images.unsplash.com/photo-1582181081466-aa54ce33062c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1959&q=80"
+  slogan = "Things aren’t always #000000 and #FFFFFF"
+  showtoc = false
+  about_me = true
+  sidebar_avatar = "img/profile.png"
+  # Sidebar setting
+  sidebar_about_description = "Data Consulstant in Higher Education"
 
   
 [permalinks]
@@ -21,6 +26,15 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[params.addtional_menus]]
   title =  "GitHub"
   href = "https://github.com/Edgar-Zamora"
+  
+  
+  [params.social]
+  rss = true
+  email = "edgarzamora2012@hotmail.com"
+  twitter = "https://twitter.com/Edgar_Zamora_"
+  stackoverflow = "https://stackoverflow.com/users/11714467/edgar-zamora"
+  github = "https://github.com/Edgar-Zamora"
+  linkedin = "https://www.linkedin.com/feed/"
   
   
   

@@ -17,7 +17,7 @@
       <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/12/28/using-gt-package-to-visualize-bad-bunny/</guid>
-      <description>Bad Bunny :rabbit:  Retrieving the data :cd: To explore some of the features present in Bad Bunny’s music, I use the spotifyr package which is an R wrapper for pulling track audio features and other information from Spotify’s Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account.</description>
+      <description>Bad Bunny 🐰  Retrieving the data 💿 To explore some of the features present in Bad Bunny’s music, I use the spotifyr package which is an R wrapper for pulling track audio features and other information from Spotify’s Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account.</description>
     </item>
     
     <item>
