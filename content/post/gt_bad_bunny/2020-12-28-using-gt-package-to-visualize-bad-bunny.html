@@ -13,6 +13,8 @@ image: 'https://images.unsplash.com/photo-1478147427282-58a87a120781?ixid=MXwxMj
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="bad-bunny" class="section level1">
@@ -86,26 +88,31 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   slice(1:10) %&gt;% 
   mutate(track_preview_url = glue(&#39;&lt;audio controlsList=&quot;nodownload&quot; controls src=&quot;{track_preview_url}&quot;&gt;&lt;/audio&gt;&#39;)) %&gt;%
   select(url, track_name, popularity, danceability, valence, energy,  track_preview_url)</code></pre>
-<p>When we originally retrieved the Spotify data, you may have noticed two really cool features, album image and track preview url. These two features are usually available for each track and we will be using them in the <code>gt</code> table.</p>
+<p>When we originally retrieved the Spotify data, you may have noticed two really cool features, album image and track preview url. These two features are usually available for each track and we will be using them in the <code>gt</code> table. In order to allow the user to be able to preview the track we need to introduce some Cascading Style Sheets (CSS) code that will translate R code into</p>
 </div>
 </div>
 <div id="building-a-gt-table" class="section level1">
 <h1>Building a <code>{gt}</code> table</h1>
 <div id="starting-from-stratch" class="section level2">
 <h2>Starting from stratch</h2>
+<p>Building a gt table is easy as running a single line of code. Piping ( %&gt;%) the <code>gt()</code> function to a dataframe will produce a gt table that will allow you to customize it in tons of different ways.</p>
+<pre class="r"><code>bad_bunny_compl_track %&gt;% 
+  gt()</code></pre>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zyvguecwia .gt_table {
+#hrqafxgmmf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
   font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
   background-color: #FFFFFF;
-  width: 50%;
+  width: auto;
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
@@ -113,14 +120,14 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-width: 2px;
   border-right-color: #D3D3D3;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: white;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_heading {
+#hrqafxgmmf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -132,7 +139,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_title {
+#hrqafxgmmf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -142,7 +149,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-bottom-width: 0;
 }
 
-#zyvguecwia .gt_subtitle {
+#hrqafxgmmf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -152,13 +159,13 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-width: 0;
 }
 
-#zyvguecwia .gt_bottom_border {
+#hrqafxgmmf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_col_headings {
+#hrqafxgmmf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -173,7 +180,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_col_heading {
+#hrqafxgmmf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -193,7 +200,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   overflow-x: hidden;
 }
 
-#zyvguecwia .gt_column_spanner_outer {
+#hrqafxgmmf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -205,15 +212,15 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 4px;
 }
 
-#zyvguecwia .gt_column_spanner_outer:first-child {
+#hrqafxgmmf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zyvguecwia .gt_column_spanner_outer:last-child {
+#hrqafxgmmf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zyvguecwia .gt_column_spanner {
+#hrqafxgmmf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -225,7 +232,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   width: 100%;
 }
 
-#zyvguecwia .gt_group_heading {
+#hrqafxgmmf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -247,7 +254,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   vertical-align: middle;
 }
 
-#zyvguecwia .gt_empty_group_heading {
+#hrqafxgmmf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -262,27 +269,23 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   vertical-align: middle;
 }
 
-#zyvguecwia .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#zyvguecwia .gt_from_md > :first-child {
+#hrqafxgmmf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zyvguecwia .gt_from_md > :last-child {
+#hrqafxgmmf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zyvguecwia .gt_row {
-  padding-top: 7px;
-  padding-bottom: 7px;
+#hrqafxgmmf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: white;
+  border-top-color: #D3D3D3;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -293,7 +296,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   overflow-x: hidden;
 }
 
-#zyvguecwia .gt_stub {
+#hrqafxgmmf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -305,7 +308,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-left: 12px;
 }
 
-#zyvguecwia .gt_summary_row {
+#hrqafxgmmf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -315,7 +318,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 5px;
 }
 
-#zyvguecwia .gt_first_summary_row {
+#hrqafxgmmf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -325,7 +328,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_grand_summary_row {
+#hrqafxgmmf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -335,7 +338,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 5px;
 }
 
-#zyvguecwia .gt_first_grand_summary_row {
+#hrqafxgmmf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +348,11 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_table_body {
+#hrqafxgmmf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hrqafxgmmf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -354,7 +361,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_footnotes {
+#hrqafxgmmf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -368,74 +375,518 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#zyvguecwia .gt_footnote {
+#hrqafxgmmf .gt_footnote {
   margin: 0px;
-  font-size: 10px;
-  padding: 4px;
-}
-
-#zyvguecwia .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#zyvguecwia .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zyvguecwia .gt_left {
+#hrqafxgmmf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hrqafxgmmf .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#hrqafxgmmf .gt_left {
   text-align: left;
 }
 
-#zyvguecwia .gt_center {
+#hrqafxgmmf .gt_center {
   text-align: center;
 }
 
-#zyvguecwia .gt_right {
+#hrqafxgmmf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zyvguecwia .gt_font_normal {
+#hrqafxgmmf .gt_font_normal {
   font-weight: normal;
 }
 
-#zyvguecwia .gt_font_bold {
+#hrqafxgmmf .gt_font_bold {
   font-weight: bold;
 }
 
-#zyvguecwia .gt_font_italic {
+#hrqafxgmmf .gt_font_italic {
   font-style: italic;
 }
 
-#zyvguecwia .gt_super {
+#hrqafxgmmf .gt_super {
   font-size: 65%;
 }
 
-#zyvguecwia .gt_footnote_marks {
+#hrqafxgmmf .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="zyvguecwia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table" style="table-layout: fixed; width: 915px">
+<div id="hrqafxgmmf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">url</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">track_name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">popularity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">danceability</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">valence</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">energy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">track_preview_url</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">LA NOCHE DE ANOCHE</td>
+      <td class="gt_row gt_right">94</td>
+      <td class="gt_row gt_right">0.856</td>
+      <td class="gt_row gt_right">0.391</td>
+      <td class="gt_row gt_right">0.618</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/a98b639351290bdb69b865ad10c2e0f5dbe0c4cd?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">Dakiti</td>
+      <td class="gt_row gt_right">91</td>
+      <td class="gt_row gt_right">0.731</td>
+      <td class="gt_row gt_right">0.145</td>
+      <td class="gt_row gt_right">0.573</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/edd9bea2e66b14169f8bbfa45a78b6599b14160a?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE MUDASTE</td>
+      <td class="gt_row gt_right">91</td>
+      <td class="gt_row gt_right">0.811</td>
+      <td class="gt_row gt_right">0.471</td>
+      <td class="gt_row gt_right">0.637</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/4b2612fb7d969678d72d61908b62b73d592a737e?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HACIENDO QUE ME AMAS</td>
+      <td class="gt_row gt_right">87</td>
+      <td class="gt_row gt_right">0.584</td>
+      <td class="gt_row gt_right">0.412</td>
+      <td class="gt_row gt_right">0.411</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/b9c23099bd993e55aa9ac967477c36e57e2d3a7d?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">YO VISTO ASÍ</td>
+      <td class="gt_row gt_right">87</td>
+      <td class="gt_row gt_right">0.688</td>
+      <td class="gt_row gt_right">0.677</td>
+      <td class="gt_row gt_right">0.881</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/7b32b29728bd3c03d3c21e0540ce549ea24caada?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">BOOKER T</td>
+      <td class="gt_row gt_right">86</td>
+      <td class="gt_row gt_right">0.883</td>
+      <td class="gt_row gt_right">0.691</td>
+      <td class="gt_row gt_right">0.600</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ddf13c4036c5fbc40c48f84cc50e46546e28d03a?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273548f7ec52da7313de0c5e4a0</td>
+      <td class="gt_row gt_left">Safaera</td>
+      <td class="gt_row gt_right">85</td>
+      <td class="gt_row gt_right">0.607</td>
+      <td class="gt_row gt_right">0.685</td>
+      <td class="gt_row gt_right">0.829</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/c67f59e5d3806b41f54f772ba8cc24410ed0a258?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE DESEO LO MEJOR</td>
+      <td class="gt_row gt_right">85</td>
+      <td class="gt_row gt_right">0.763</td>
+      <td class="gt_row gt_right">0.194</td>
+      <td class="gt_row gt_right">0.597</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/5734e3556195f4598b5562d9c8f0630693f51fec?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HOY COBRÉ</td>
+      <td class="gt_row gt_right">84</td>
+      <td class="gt_row gt_right">0.860</td>
+      <td class="gt_row gt_right">0.375</td>
+      <td class="gt_row gt_right">0.725</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ed3eac946a786dc1bfaa89cb1d135428046c119c?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b2734891d9b25d8919448388f3bb</td>
+      <td class="gt_row gt_left">LA CANCION</td>
+      <td class="gt_row gt_right">84</td>
+      <td class="gt_row gt_right">0.754</td>
+      <td class="gt_row gt_right">0.429</td>
+      <td class="gt_row gt_right">0.646</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="NA"&gt;&lt;/audio&gt;</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#cjhlcwkcdg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cjhlcwkcdg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cjhlcwkcdg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cjhlcwkcdg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cjhlcwkcdg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cjhlcwkcdg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cjhlcwkcdg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cjhlcwkcdg .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cjhlcwkcdg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cjhlcwkcdg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cjhlcwkcdg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cjhlcwkcdg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cjhlcwkcdg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#cjhlcwkcdg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjhlcwkcdg .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjhlcwkcdg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cjhlcwkcdg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#cjhlcwkcdg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cjhlcwkcdg .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#cjhlcwkcdg .gt_left {
+  text-align: left;
+}
+
+#cjhlcwkcdg .gt_center {
+  text-align: center;
+}
+
+#cjhlcwkcdg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cjhlcwkcdg .gt_font_normal {
+  font-weight: normal;
+}
+
+#cjhlcwkcdg .gt_font_bold {
+  font-weight: bold;
+}
+
+#cjhlcwkcdg .gt_font_italic {
+  font-style: italic;
+}
+
+#cjhlcwkcdg .gt_super {
+  font-size: 65%;
+}
+
+#cjhlcwkcdg .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="cjhlcwkcdg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table" style="table-layout: fixed;; width: 0px">
   <colgroup>
-    <col style="width: 100px"/>
-    <col style="width: 250px"/>
-    <col style="width: 95px"/>
-    <col style="width: 100px"/>
-    <col style="width: 95px"/>
-    <col style="width: 95px"/>
-    <col style="width: 180px"/>
+    <col style="width:100px;"/>
+    <col style="width:250px;"/>
+    <col style="width:95px;"/>
+    <col style="width:100px;"/>
+    <col style="width:95px;"/>
+    <col style="width:95px;"/>
+    <col style="width:180px;"/>
   </colgroup>
   <thead class="gt_header">
     <tr>
@@ -464,7 +915,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   <tbody class="gt_table_body">
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">LA NOCHE DE ANOCHE</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">LA NOCHE DE ANOCHE</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #23A6E1;">94</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.86</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.62</td>
@@ -474,7 +925,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">Dakiti</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">Dakiti</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #DAAB37;">91</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.73</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.57</td>
@@ -484,7 +935,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">TE MUDASTE</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">TE MUDASTE</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #DAAB37;">91</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.81</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.64</td>
@@ -494,7 +945,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">HACIENDO QUE ME AMAS</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">HACIENDO QUE ME AMAS</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #EFCF27;">87</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.58</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.41</td>
@@ -504,7 +955,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">YO VISTO ASÍ</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">YO VISTO ASÍ</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #EFCF27;">87</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.69</td>
       <td class="gt_row gt_center" style="font-size: 20px; color: #156594; font-weight: bold;">0.88</td>
@@ -514,7 +965,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">BOOKER T</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">BOOKER T</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #F3D820;">86</td>
       <td class="gt_row gt_center" style="font-size: 20px; color: #156594; font-weight: bold;">0.88</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.60</td>
@@ -524,7 +975,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273548f7ec52da7313de0c5e4a0" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">Safaera</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">Safaera</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #F7E116;">85</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.61</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.83</td>
@@ -534,7 +985,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">TE DESEO LO MEJOR</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">TE DESEO LO MEJOR</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #F7E116;">85</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.76</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.60</td>
@@ -544,7 +995,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">HOY COBRÉ</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">HOY COBRÉ</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #FBEB04;">84</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.86</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.72</td>
@@ -554,7 +1005,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
     </tr>
     <tr>
       <td class="gt_row gt_left"><img src="https://i.scdn.co/image/ab67616d0000b2734891d9b25d8919448388f3bb" style="height:80px;"></td>
-      <td class="gt_row gt_center" style="font-family: Colors Of Autumn; font-size: 18px;">LA CANCION</td>
+      <td class="gt_row gt_center" style="font-family: &#39;Colors Of Autumn&#39;; font-size: 18px;">LA CANCION</td>
       <td class="gt_row gt_center" style="border-left-width: 3px; border-left-style: solid; border-left-color: black; border-right-width: 3px; border-right-style: solid; border-right-color: black; font-size: 18.5px; color: #000000; background-color: #FBEB04;">84</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.75</td>
       <td class="gt_row gt_center" style="font-size: 18.5px;">0.65</td>

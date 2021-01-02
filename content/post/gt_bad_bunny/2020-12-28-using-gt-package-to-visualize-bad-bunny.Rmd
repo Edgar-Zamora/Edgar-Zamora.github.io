@@ -120,13 +120,24 @@ bad_bunny_compl_track <- bad_bunny_tracks %>%
   select(url, track_name, popularity, danceability, valence, energy,  track_preview_url)
 ```
 
-When we originally retrieved the Spotify data, you may have noticed two really cool features, album image and track preview url. These two features are usually available for each track and we will be using them in the `gt` table.
+When we originally retrieved the Spotify data, you may have noticed two really cool features, album image and track preview url. These two features are usually available for each track and we will be using them in the `gt` table. In order to allow the user to be able to preview the track we need to introduce some Cascading Style Sheets (CSS) code that will translate R code into 
 
 # Building a `{gt}` table
 
 ## Starting from stratch
 
-```{r gt_tbl, echo=FALSE, fig.width=10}
+Building a gt table is easy as running a single line of code. Piping ( %>%) the `gt()` function to a dataframe will produce a gt table that will allow you to customize it in tons of different ways.
+
+```{r basic_gt}
+bad_bunny_compl_track %>% 
+  gt()
+
+```
+
+
+
+
+```{r gt_tbl, echo=FALSE, fig.width=7}
 
 max_dance_row <- which.max(bad_bunny_compl_track$danceability)
 max_energy_row <- which.max(bad_bunny_compl_track$energy)
@@ -238,14 +249,6 @@ bad_bunny_compl_track %>%
     footnote = md("**Valence** describes the positiveness conveyed by a track. high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low <br>valence sound more negative (e.g. sad, depressed, angry)"),
     locations = cells_column_labels(
       columns = vars(valence))
-  ) %>% 
-  tab_options(
-    table_body.hlines.color = "white",
-    table.border.bottom.color = "white",
-    table.border.bottom.width = px(3),
-    data_row.padding = px(7),
-    footnotes.font.size = px(10),
-    table.width = pct(50)
   ) %>% 
   tab_source_note(source_note = md("**Data**: Spotify Web API")) %>% 
   data_color(
