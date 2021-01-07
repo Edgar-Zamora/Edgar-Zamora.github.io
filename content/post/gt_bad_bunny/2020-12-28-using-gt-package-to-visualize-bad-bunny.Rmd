@@ -1,7 +1,7 @@
 ---
-title: Using the {gt} package to visualize Bad Bunny
+title: Using the {gt} package to visualize Bad Bunny tracks
 author: Edgar Zamora
-date: '2020-12-28'
+date: "`r Sys.Date()`"
 slug: using-gt-package-to-visualize-bad-bunny
 categories: []
 tags:
@@ -14,9 +14,13 @@ image: 'https://images.unsplash.com/photo-1478147427282-58a87a120781?ixid=MXwxMj
 
 # Bad Bunny 🐰
 
+Benito Antonio Martínez Ocasio, better known as Bad Bunny, may have had one of the best years of any artist based on both the volume of albums and singles but also on his popularity. According to Spotify, Bad Bunny is the most-streamed artist of 2020, with a staggering 8.3 billion streams with many coming from his album ***YHLQMDLG*** ("Yo Hago Lo Que Me Da La Gana" - "I Do Whatever I Want") which received 3.3 billion streams^[A [Billboard](https://www.billboard.com/articles/business/streaming/9491694/bad-bunny-spotify-most-streamed-artist-2020) article written by Leila Cobo]. 
+
+With Bad Bunny's popularity in 2020, I thought it would be a great opporutnity to use the Spotify API to check out some of those streamed songs. The rest this blog will cover a the `{spotifyr}` and `{gt}` packages which will allow us to see some of the track features for Bad Bunnys most popular songs in a beautiful table.
+
 # Retrieving the data 💿
 
-To explore some of the features present in Bad Bunny's music, I use the `spotifyr` [package](https://github.com/charlie86/spotifyr) which is an R wrapper for pulling track audio features and other information from Spotify's Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account. To create Spotify developer account you can go to their their [dashboard](https://developer.spotify.com/dashboard/). After logging in you will need to "create an app" which will provide you with a **Client ID** and **Client Secret** which important in setting up a connection to the API. After doing that you will have to save those tokens as an object as so:
+To explore some of the features present in Bad Bunny's music, I use the `{spotifyr}` [package](https://github.com/charlie86/spotifyr) which is an R wrapper for pulling track audio features and other information from Spotify's Web API. In order to access the Spotify Web API, it is required that you have a Spotify account (free subscription works) of which to connect a Spotify developer account. To create Spotify developer account you can go to their their [dashboard](https://developer.spotify.com/dashboard/). After logging in you will need to "create an app" which will provide you with a **Client ID** and **Client Secret** which important in setting up a connection to the API. After doing that you will have to save those tokens as an object as so:
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -126,7 +130,7 @@ When we originally retrieved the Spotify data, you may have noticed two really c
 
 ## Starting from stratch
 
-Building a gt table is easy as running a single line of code. Piping ( %>%) the `gt()` function to a dataframe will produce a gt table that will allow you to customize it in tons of different ways.
+Building a gt table is easy as running a single line of code. Piping ( %>%) the `gt()` function to a dataframe will produce a gt table that will allow you to customize it in tons of different ways. 
 
 ```{r basic_gt}
 bad_bunny_compl_track %>% 
@@ -134,42 +138,50 @@ bad_bunny_compl_track %>%
 
 ```
 
+```{r basic_gt_plot}
+base_tbl <- bad_bunny_compl_track %>% 
+  gt()
+```
+
+As seen above, the table is bare but in the following sections will begin to make edits until we create a wonderful-looking table. Do keep in mind that the components I decide to edit does not cover all the possibility and would encourage you to go check out the packages [reference package](https://gt.rstudio.com/reference/index.html).
+
+## Formating Data
+
+With the `fmt_*()` functions, we can modify columns so that they take on a specific appearance/value. 
+
+```{r gt_formating}
+
+formated_tbl <- base_tbl %>% 
+  fmt_markdown(columns = vars(track_preview_url)) %>% 
+  fmt_number(
+    columns = vars(danceability, energy, valence),
+    decimals = 2
+    )
+
+```
+
+## Modifying Columns
 
 
+## Styling
 
-```{r gt_tbl, echo=FALSE, fig.width=7}
+
+## Font
+
+```{r gt_tbl, echo=FALSE, fig.width=7, eval=TRUE}
 
 max_dance_row <- which.max(bad_bunny_compl_track$danceability)
 max_energy_row <- which.max(bad_bunny_compl_track$energy)
 max_valence_row <- which.max(bad_bunny_compl_track$valence)
 
 
-bad_bunny_compl_track %>% 
-  gt() %>% 
-  fmt_markdown(columns = vars(track_preview_url)) %>%
-  fmt_number(
-    columns = vars(danceability, energy, valence),
-    decimals = 2
-  ) %>% 
+
   text_transform(
     locations = cells_body(vars(url)),
     fn = function(x){
       web_image(url = x, height = 80)
     }
-  ) %>%
-  cols_align(
-    align = "center",
-    columns = vars(track_name, danceability, valence, energy, popularity)
-  ) %>%
-  cols_label(
-    track_preview_url = md("Preview The Track &#127911;"),
-    url = " ", 
-    track_name = "Track Name",
-    popularity = "Popularity",
-    danceability = "Danceability",
-    valence = "Valence",
-    energy = "Energy"
-  ) %>% 
+  )  %>% 
   tab_spanner(
     label = md("Track Audio Features &#128191;"),
     columns = vars(danceability, energy, valence)
@@ -258,13 +270,7 @@ bad_bunny_compl_track %>%
       palette = c('#fbeb04', '#f1d324', '#e5bd30', '#d7a739', '#23a6e1'),
       domain = NULL
     )
-  ) %>% 
-  cols_width(
-    vars(track_name) ~ px(250),
-    vars(track_preview_url) ~ px(180),
-    vars(popularity, energy, valence) ~ px(95),
-    vars(url, danceability) ~ px(100)
-  )
+  ) 
 ```
 
 ## Lets get fancy
