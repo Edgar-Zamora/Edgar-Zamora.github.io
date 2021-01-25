@@ -16,7 +16,7 @@ image: 'https://images.unsplash.com/photo-1478147427282-58a87a120781?ixid=MXwxMj
 
 Benito Antonio Martínez Ocasio, better known as Bad Bunny, may have had one of the best years of any artist based on both the volume of albums and singles but also on his popularity. According to Spotify, Bad Bunny is the most-streamed artist of 2020, with a staggering 8.3 billion streams with many coming from his album ***YHLQMDLG*** ("Yo Hago Lo Que Me Da La Gana" - "I Do Whatever I Want") which received 3.3 billion streams^[A [Billboard](https://www.billboard.com/articles/business/streaming/9491694/bad-bunny-spotify-most-streamed-artist-2020) article written by Leila Cobo]. 
 
-With Bad Bunny's popularity in 2020, I thought it would be a great opporutnity to use the Spotify API to check out some of those streamed songs. The rest this blog will cover a the `{spotifyr}` and `{gt}` packages which will allow us to see some of the track features for Bad Bunnys most popular songs in a beautiful table.
+With Bad Bunny's popularity in 2020, I thought it would be a great opportunity to use the Spotify API to check out some of those streamed songs. The rest this blog will cover a the `{spotifyr}` and `{gt}` packages which will allow us to see some of the track features for Bad Bunnys most popular songs in a beautiful table.
 
 # Retrieving the data 💿
 
@@ -141,29 +141,80 @@ bad_bunny_compl_track %>%
 ```{r basic_gt_plot}
 base_tbl <- bad_bunny_compl_track %>% 
   gt()
+
+base_tbl
 ```
 
 As seen above, the table is bare but in the following sections will begin to make edits until we create a wonderful-looking table. Do keep in mind that the components I decide to edit does not cover all the possibility and would encourage you to go check out the packages [reference package](https://gt.rstudio.com/reference/index.html).
 
 ## Formating Data
 
-With the `fmt_*()` functions, we can modify columns so that they take on a specific appearance/value. 
+With the `fmt_*()` functions, we can modify columns so that they take on a specific appearance/value. The two we changes are applied to the gt table is to make some columns accept markdown while changing the decimal places for numerical values. Using the `fmt_markdown()` function while specifying the desired column in the `columns` argument will allow columns to be rendered in their appreciate output type. As you see in the base table, there is a bunch of HTML tags that unless rendered as HTML will not make sense. Formatting that to column allows for that code to be translated and rendered as is should be, which is a audio tag. The `columns = vars()` argument is common throughout the `{gt}` package and is something you will become familiar with. To format columns that contain numerical values, you follow the same syntax as was down with markdown. The added argument is one that ask you to indicate the number of decimal places to use. Your code should look like the following.
 
 ```{r gt_formating}
 
-formated_tbl <- base_tbl %>% 
-  fmt_markdown(columns = vars(track_preview_url)) %>% 
+formatted_tbl <- base_tbl %>% 
+  fmt_markdown(columns = vars(track_preview_url)) %>% #formatting column to markdown
   fmt_number(
-    columns = vars(danceability, energy, valence),
+    columns = vars(danceability, energy, valence), #formatting column numerical value
     decimals = 2
     )
+
+formatted_tbl
 
 ```
 
 ## Modifying Columns
 
+Modifying columns follows the same logic that was seen with formatting columns. You will have select the columns you want and then pass some arguments to achieve the desired results. In this section we focus adjusting the width and names of columns. Those functions that allow for the modification of entire column start with `col_*()` followed by the action you want. For use, those will be `col_width()`, `col_label()` and `col_align()`. 
 
-## Styling
+If you have used the `rename()` from the from the `{dplyr}` package or `recode()` from base R, then the format for using `col_width()` should look familiar. Essentially you select the desired columns and using the tilde(~) as a separator you then provide the unit length which is in pixel format. You should end up with two a two-sided formula that `selects desired columns ~ sets desired length of said columns`. 
+
+To change the name of each column, you use the `col_label()` function. It is 'important to note that while columns can be freely relabeled, we continue to refer to the columns by their original column names'^[More information can be found at: https://gt.rstudio.com/reference/cols_label.html]. With that in mind, everything to the left of the equal sign should refer to the selected column by name while the right side is the new label of the aforementioned column like so `current name = new name`. While also relabeling columns, you can allow the option to accept `md()` and `html()` helper functions, so that you can add cool things like emojis^[You can search for the hex or decimal code on Google!!
+
+The last modification we do is aligning our columns so that the **column labels and values** are center aligned. First you select your desired (*remember that argument*) columns followed by choosing what type of alignment you want. There are four alignment types: left, center, right and auto, which is default. You can mix alignments as with most things in the `{gt}` package. 
+
+```{r column_mod}
+
+modified_cols <- formatted_tbl %>% 
+  cols_width(
+    vars(url) ~ px(150),   # Changing the width of the url column
+    vars(track_name) ~ px(200),
+    vars(popularity, danceability, valence, energy) ~ px(100),
+    vars(track_preview_url) ~ px(300)
+  ) %>% 
+  cols_label(
+    url = " ",
+    track_name = md("Track Name &#128192;"), # Relabeling the column while formatting to accept markdown
+    popularity = "Popularity",  # Relabeling the column
+    danceability = "Danceability",
+    valence = "Valence",
+    energy = "Energy",
+    track_preview_url = md("&#127911; Let's Take Listen &#127911;")
+  ) %>% 
+  cols_align(
+    vars(popularity, danceability, valence, energy, track_preview_url), # Center aligning these columns
+    align = 'center'
+  )
+  
+modified_cols 
+
+```
+
+## Editing Table Parts
+
+### Footnotes
+
+When it comes to creating table footnotes, it can be both easy and complex at the same time depending on where you would like place footnotes. You can have a footnote that is general or one that specifically targets a value within a cell. For this post, we focus more on the general side of footnoting. The `tab_footnote()` function will allow you to add footnotes, regardless of the level of complexity. 
+
+
+### Style
+
+
+
+## Labeling
+
+
 
 
 ## Font
@@ -174,8 +225,31 @@ max_dance_row <- which.max(bad_bunny_compl_track$danceability)
 max_energy_row <- which.max(bad_bunny_compl_track$energy)
 max_valence_row <- which.max(bad_bunny_compl_track$valence)
 
-
-
+base_tbl %>% 
+  fmt_markdown(columns = vars(track_preview_url)) %>% #formatting column to markdown
+  fmt_number(
+    columns = vars(danceability, energy, valence), #formatting column numerical value
+    decimals = 2
+    ) %>% 
+  cols_width(
+    vars(url) ~ px(150),   # Changing the width of the url column
+    vars(track_name) ~ px(300),
+    vars(popularity, danceability, valence, energy) ~ px(100),
+    vars(track_preview_url) ~ px(300)
+  ) %>% 
+  cols_label(
+    url = " ",
+    track_name = md("Track Name &#128192;"), # Relabeling the column while formatting to accept markdown
+    popularity = "Popularity",  # Relabeling the column
+    danceability = "Danceability",
+    valence = "Valence",
+    energy = "Energy",
+    track_preview_url = md("&#127911; Let's Take Listen &#127911;")
+  ) %>% 
+  cols_align(
+    vars(popularity, danceability, valence, energy, track_preview_url), # Center aligning these columns
+    align = 'center'
+  ) %>% 
   text_transform(
     locations = cells_body(vars(url)),
     fn = function(x){
