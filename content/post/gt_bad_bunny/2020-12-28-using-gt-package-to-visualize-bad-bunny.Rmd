@@ -77,7 +77,7 @@ track_info <- function(artist) {
 bad_bunny_tracks <- track_info("Bad Bunny")
 ```
 
-After retrieving the audio features for each of Bad Bunny's tracks, I proceed to get the popularity of each track based on Spotify's algorithm. To be able to get the popularity of a track we need each track unique id which is provided to us. Using the `pluck()` function we can, pluck lol, the id of each track to feed into the function that we create below. Similar to the custom made `track_info()` function, we create a `track_popularity()` function with the `get_track()` function from `spotifyr` as the core function.
+After retrieving the audio features for each of Bad Bunny's tracks, I proceed to get the popularity of each track based on Spotify's algorithm. To be able to get the popularity of a track we need each track unique id which is provided to us. Using the `pluck()` function we can, pluck the id of each track to feed into the function that we create below. Similar to the custom made `track_info()` function, we create a `track_popularity()` function with the `get_track()` function from `spotifyr` as the core function.
 
 ```{r track_popularity, eval=FALSE}
 
@@ -170,7 +170,7 @@ Modifying columns follows the same logic that was seen with formatting columns. 
 
 If you have used the `rename()` from the from the `{dplyr}` package or `recode()` from base R, then the format for using `col_width()` should look familiar. Essentially you select the desired columns and using the tilde(~) as a separator you then provide the unit length which is in pixel format. You should end up with two a two-sided formula that `selects desired columns ~ sets desired length of said columns`. 
 
-To change the name of each column, you use the `col_label()` function. It is 'important to note that while columns can be freely relabeled, we continue to refer to the columns by their original column names'^[More information can be found at: https://gt.rstudio.com/reference/cols_label.html]. With that in mind, everything to the left of the equal sign should refer to the selected column by name while the right side is the new label of the aforementioned column like so `current name = new name`. While also relabeling columns, you can allow the option to accept `md()` and `html()` helper functions, so that you can add cool things like emojis^[You can search for the hex or decimal code on Google!!
+To change the name of each column, you use the `col_label()` function. It is 'important to note that while columns can be freely relabeled, we continue to refer to the columns by their original column names'. With that in mind, everything to the left of the equal sign should refer to the selected column by name while the right side is the new label of the aforementioned column like so `current name = new name`. While also relabeling columns, you can allow the option to accept `md()` and `html()` helper functions, so that you can add cool things like emojis^[You can search for the hex or decimal code on Google!!
 
 The last modification we do is aligning our columns so that the **column labels and values** are center aligned. First you select your desired (*remember that argument*) columns followed by choosing what type of alignment you want. There are four alignment types: left, center, right and auto, which is default. You can mix alignments as with most things in the `{gt}` package. 
 
