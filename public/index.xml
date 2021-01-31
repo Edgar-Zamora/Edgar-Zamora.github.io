@@ -6,19 +6,10 @@
     <description>Recent content on Edgar Zamora</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Using the {gt} package to visualize Bad Bunny tracks</title>
-      <link>/2021/01/01/using-gt-package-to-visualize-bad-bunny/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/2021/01/01/using-gt-package-to-visualize-bad-bunny/</guid>
-      <description>Bad Bunny 🐰 Benito Antonio Martínez Ocasio, better known as Bad Bunny, may have had one of the best years of any artist based on both the volume of albums and singles but also on his popularity. According to Spotify, Bad Bunny is the most-streamed artist of 2020, with a staggering 8.3 billion streams with many coming from his album YHLQMDLG (“Yo Hago Lo Que Me Da La Gana” - “I Do Whatever I Want”) which received 3.</description>
-    </item>
     
     <item>
       <title>Exploring how EA Sports&#39; FIFA added to my preference in music using the spotifyr package in R</title>

@@ -2,6 +2,7 @@
 title: Using the {gt} package to visualize Bad Bunny tracks
 author: Edgar Zamora
 date: "`r Sys.Date()`"
+draft: true
 slug: using-gt-package-to-visualize-bad-bunny
 categories: []
 tags:
@@ -170,107 +171,107 @@ formated_tbl <- base_tbl %>%
 
 ```{r gt_tbl, echo=FALSE, fig.width=7, eval=TRUE}
 
-max_dance_row <- which.max(bad_bunny_compl_track$danceability)
-max_energy_row <- which.max(bad_bunny_compl_track$energy)
-max_valence_row <- which.max(bad_bunny_compl_track$valence)
+#max_dance_row <- which.max(bad_bunny_compl_track$danceability)
+#max_energy_row <- which.max(bad_bunny_compl_track$energy)
+#max_valence_row <- which.max(bad_bunny_compl_track$valence)
 
 
 
-  text_transform(
-    locations = cells_body(vars(url)),
-    fn = function(x){
-      web_image(url = x, height = 80)
-    }
-  )  %>% 
-  tab_spanner(
-    label = md("Track Audio Features &#128191;"),
-    columns = vars(danceability, energy, valence)
-  ) %>% 
-  tab_style(
-    style = list(cell_text(font = "Againts", #https://www.dafont.com/againts.font?text=Bad+Bunny
-                           size = px(65), 
-                           color = "white"),
-                 cell_fill(color = "black")),
-    locations = cells_title("title")
-  ) %>% 
-  tab_style(
-    style = cell_text(
-      font = "Colors Of Autumn", #https://www.dafont.com/colors-of-autumn.font
-      size = px(18)),
-    locations = cells_body(vars(track_name))
-  ) %>% 
-  tab_style(
-    style = cell_borders(
-      sides = c("left", "right"),
-      color = "black",
-      weight = px(3)),
-    locations = cells_body(columns = vars(popularity))
-  ) %>% 
-  tab_style(
-    style = cell_borders(
-      sides = c("bottom"),
-      color = "black",
-      weight = px(3)),
-    locations = cells_column_labels(columns = everything())
-    ) %>% 
-  tab_style(
-    style = cell_text(
-      size = px(18.5)),
-    locations = cells_body(vars(popularity, danceability, energy,
-                     valence)) 
-  ) %>% 
-  tab_style(
-    style = cell_text(
-      weight = "bold",
-      color = "#156594",
-      size = px(20)
-    ),
-    locations = list(
-      cells_body(columns = c(4), rows = as.numeric(max_dance_row)),
-      cells_body(columns = c(5), rows = as.numeric(max_valence_row)),
-      cells_body(columns = c(6), rows =as.numeric(max_energy_row))
-    )) %>% 
-  tab_style(
-    style = list(
-      cell_borders(
-        sides = c("top"),
-        color = "white",
-        weight = px(3))
-      ),
-    locations = cells_column_labels(columns = everything())
-  ) %>% 
-  tab_header(
-    title = md("Bad Bunny <img src='https://1000marcas.net/wp-content/uploads/2020/01/Bad-Bunny-emblema.jpg' width='100' height='60' style='vertical-align:middle'> ")
-  )  %>% 
-  tab_footnote(
-    footnote = md("**Popularity** is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are."),
-    locations = cells_column_labels(
-      columns = vars(popularity))
-  ) %>% 
-  tab_footnote(
-    footnote = md("**Danceability** is a measure based on a combination of musical elements including tempo, rhythm stability, beat strenght, and overall regularity"),
-    locations = cells_column_labels(
-      columns = vars(danceability))
-  ) %>% 
-  tab_footnote(
-    footnote = md("**Energy** represents a perceptual measure of intensity and activity in a track. High energy resembles death metal while low resembles Bach."),
-    locations = cells_column_labels(
-      columns = vars(energy))
-  ) %>% 
-  tab_footnote(
-    footnote = md("**Valence** describes the positiveness conveyed by a track. high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low <br>valence sound more negative (e.g. sad, depressed, angry)"),
-    locations = cells_column_labels(
-      columns = vars(valence))
-  ) %>% 
-  tab_source_note(source_note = md("**Data**: Spotify Web API")) %>% 
-  data_color(
-    columns = vars(popularity),
-    colors = scales::col_numeric(
-      # custom defined values - notice that order matters!
-      palette = c('#fbeb04', '#f1d324', '#e5bd30', '#d7a739', '#23a6e1'),
-      domain = NULL
-    )
-  ) 
+#  text_transform(
+#    locations = cells_body(vars(url)),
+#    fn = function(x){
+#      web_image(url = x, height = 80)
+#    }
+#  )  %>% 
+#  tab_spanner(
+#    label = md("Track Audio Features &#128191;"),
+#    columns = vars(danceability, energy, valence)
+#  ) %>% 
+#  tab_style(
+#    style = list(cell_text(font = "Againts", #https://www.dafont.com/againts.font?text=Bad+Bunny
+#                           size = px(65), 
+#                           color = "white"),
+#                 cell_fill(color = "black")),
+#    locations = cells_title("title")
+#  ) %>% 
+#  tab_style(
+#    style = cell_text(
+#      font = "Colors Of Autumn", #https://www.dafont.com/colors-of-autumn.font
+  #     size = px(18)),
+  #   locations = cells_body(vars(track_name))
+  # ) %>% 
+  # tab_style(
+  #   style = cell_borders(
+  #     sides = c("left", "right"),
+  #     color = "black",
+  #     weight = px(3)),
+  #   locations = cells_body(columns = vars(popularity))
+  # ) %>% 
+  # tab_style(
+  #   style = cell_borders(
+  #     sides = c("bottom"),
+  #     color = "black",
+  #     weight = px(3)),
+  #   locations = cells_column_labels(columns = everything())
+  #   ) %>% 
+  # tab_style(
+  #   style = cell_text(
+  #     size = px(18.5)),
+  #   locations = cells_body(vars(popularity, danceability, energy,
+  #                    valence)) 
+  # ) %>% 
+  # tab_style(
+  #   style = cell_text(
+  #     weight = "bold",
+  #     color = "#156594",
+  #     size = px(20)
+  #   ),
+  #   locations = list(
+  #     cells_body(columns = c(4), rows = as.numeric(max_dance_row)),
+  #     cells_body(columns = c(5), rows = as.numeric(max_valence_row)),
+  #     cells_body(columns = c(6), rows =as.numeric(max_energy_row))
+  #   )) %>% 
+  # tab_style(
+  #   style = list(
+  #     cell_borders(
+  #       sides = c("top"),
+  #       color = "white",
+  #       weight = px(3))
+  #     ),
+  #   locations = cells_column_labels(columns = everything())
+  # ) %>% 
+  # tab_header(
+  #   title = md("Bad Bunny <img src='https://1000marcas.net/wp-content/uploads/2020/01/Bad-Bunny-emblema.jpg' width='100' height='60' style='vertical-align:middle'> ")
+  # )  %>% 
+  # tab_footnote(
+  #   footnote = md("**Popularity** is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are."),
+  #   locations = cells_column_labels(
+  #     columns = vars(popularity))
+  # ) %>% 
+  # tab_footnote(
+  #   footnote = md("**Danceability** is a measure based on a combination of musical elements including tempo, rhythm stability, beat strenght, and overall regularity"),
+  #   locations = cells_column_labels(
+  #     columns = vars(danceability))
+  # ) %>% 
+  # tab_footnote(
+  #   footnote = md("**Energy** represents a perceptual measure of intensity and activity in a track. High energy resembles death metal while low resembles Bach."),
+  #   locations = cells_column_labels(
+  #     columns = vars(energy))
+  # ) %>% 
+  # tab_footnote(
+  #   footnote = md("**Valence** describes the positiveness conveyed by a track. high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low <br>valence sound more negative (e.g. sad, depressed, angry)"),
+  #   locations = cells_column_labels(
+  #     columns = vars(valence))
+  # ) %>% 
+  # tab_source_note(source_note = md("**Data**: Spotify Web API")) %>% 
+  # data_color(
+  #   columns = vars(popularity),
+  #   colors = scales::col_numeric(
+  #     # custom defined values - notice that order matters!
+  #     palette = c('#fbeb04', '#f1d324', '#e5bd30', '#d7a739', '#23a6e1'),
+  #     domain = NULL
+  #   )
+  # ) 
 ```
 
 ## Lets get fancy
