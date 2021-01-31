@@ -19,7 +19,7 @@ image: 'https://images.unsplash.com/photo-1478147427282-58a87a120781?ixid=MXwxMj
 <div id="bad-bunny" class="section level1">
 <h1>Bad Bunny 🐰</h1>
 <p>Benito Antonio Martínez Ocasio, better known as Bad Bunny, may have had one of the best years of any artist based on both the volume of albums and singles but also on his popularity. According to Spotify, Bad Bunny is the most-streamed artist of 2020, with a staggering 8.3 billion streams with many coming from his album <strong><em>YHLQMDLG</em></strong> (“Yo Hago Lo Que Me Da La Gana” - “I Do Whatever I Want”) which received 3.3 billion streams<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-<p>With Bad Bunny’s popularity in 2020, I thought it would be a great opporutnity to use the Spotify API to check out some of those streamed songs. The rest this blog will cover a the <code>{spotifyr}</code> and <code>{gt}</code> packages which will allow us to see some of the track features for Bad Bunnys most popular songs in a beautiful table.</p>
+<p>With Bad Bunny’s popularity in 2020, I thought it would be a great opportunity to use the Spotify API to check out some of those streamed songs. The rest this blog will cover a the <code>{spotifyr}</code> and <code>{gt}</code> packages which will allow us to see some of the track features for Bad Bunnys most popular songs in a beautiful table.</p>
 </div>
 <div id="retrieving-the-data" class="section level1">
 <h1>Retrieving the data 💿</h1>
@@ -53,7 +53,7 @@ access_token &lt;- get_spotify_access_token()</code></pre>
 
 
 bad_bunny_tracks &lt;- track_info(&quot;Bad Bunny&quot;)</code></pre>
-<p>After retrieving the audio features for each of Bad Bunny’s tracks, I proceed to get the popularity of each track based on Spotify’s algorithm. To be able to get the popularity of a track we need each track unique id which is provided to us. Using the <code>pluck()</code> function we can, pluck lol, the id of each track to feed into the function that we create below. Similar to the custom made <code>track_info()</code> function, we create a <code>track_popularity()</code> function with the <code>get_track()</code> function from <code>spotifyr</code> as the core function.</p>
+<p>After retrieving the audio features for each of Bad Bunny’s tracks, I proceed to get the popularity of each track based on Spotify’s algorithm. To be able to get the popularity of a track we need each track unique id which is provided to us. Using the <code>pluck()</code> function we can, pluck the id of each track to feed into the function that we create below. Similar to the custom made <code>track_info()</code> function, we create a <code>track_popularity()</code> function with the <code>get_track()</code> function from <code>spotifyr</code> as the core function.</p>
 <pre class="r"><code>track_ids &lt;- bad_bunny_tracks %&gt;% 
   pull(track_id)
 
@@ -103,7 +103,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jhzxzggoew .gt_table {
+#epnlaqwsjt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -126,7 +126,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_heading {
+#epnlaqwsjt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -138,7 +138,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_title {
+#epnlaqwsjt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -148,7 +148,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-bottom-width: 0;
 }
 
-#jhzxzggoew .gt_subtitle {
+#epnlaqwsjt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -158,13 +158,13 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-width: 0;
 }
 
-#jhzxzggoew .gt_bottom_border {
+#epnlaqwsjt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_col_headings {
+#epnlaqwsjt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -179,7 +179,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_col_heading {
+#epnlaqwsjt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -199,7 +199,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   overflow-x: hidden;
 }
 
-#jhzxzggoew .gt_column_spanner_outer {
+#epnlaqwsjt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -211,15 +211,15 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 4px;
 }
 
-#jhzxzggoew .gt_column_spanner_outer:first-child {
+#epnlaqwsjt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jhzxzggoew .gt_column_spanner_outer:last-child {
+#epnlaqwsjt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jhzxzggoew .gt_column_spanner {
+#epnlaqwsjt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -231,7 +231,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   width: 100%;
 }
 
-#jhzxzggoew .gt_group_heading {
+#epnlaqwsjt .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -253,7 +253,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   vertical-align: middle;
 }
 
-#jhzxzggoew .gt_empty_group_heading {
+#epnlaqwsjt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -268,19 +268,19 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   vertical-align: middle;
 }
 
-#jhzxzggoew .gt_striped {
+#epnlaqwsjt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jhzxzggoew .gt_from_md > :first-child {
+#epnlaqwsjt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jhzxzggoew .gt_from_md > :last-child {
+#epnlaqwsjt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jhzxzggoew .gt_row {
+#epnlaqwsjt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -299,7 +299,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   overflow-x: hidden;
 }
 
-#jhzxzggoew .gt_stub {
+#epnlaqwsjt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -311,7 +311,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-left: 12px;
 }
 
-#jhzxzggoew .gt_summary_row {
+#epnlaqwsjt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -321,7 +321,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 5px;
 }
 
-#jhzxzggoew .gt_first_summary_row {
+#epnlaqwsjt .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -331,7 +331,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_grand_summary_row {
+#epnlaqwsjt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -341,7 +341,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   padding-right: 5px;
 }
 
-#jhzxzggoew .gt_first_grand_summary_row {
+#epnlaqwsjt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -351,7 +351,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_table_body {
+#epnlaqwsjt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -360,7 +360,7 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_footnotes {
+#epnlaqwsjt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -374,13 +374,13 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_footnote {
+#epnlaqwsjt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#jhzxzggoew .gt_sourcenotes {
+#epnlaqwsjt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -394,46 +394,46 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#jhzxzggoew .gt_sourcenote {
+#epnlaqwsjt .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#jhzxzggoew .gt_left {
+#epnlaqwsjt .gt_left {
   text-align: left;
 }
 
-#jhzxzggoew .gt_center {
+#epnlaqwsjt .gt_center {
   text-align: center;
 }
 
-#jhzxzggoew .gt_right {
+#epnlaqwsjt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jhzxzggoew .gt_font_normal {
+#epnlaqwsjt .gt_font_normal {
   font-weight: normal;
 }
 
-#jhzxzggoew .gt_font_bold {
+#epnlaqwsjt .gt_font_bold {
   font-weight: bold;
 }
 
-#jhzxzggoew .gt_font_italic {
+#epnlaqwsjt .gt_font_italic {
   font-style: italic;
 }
 
-#jhzxzggoew .gt_super {
+#epnlaqwsjt .gt_super {
   font-size: 65%;
 }
 
-#jhzxzggoew .gt_footnote_marks {
+#epnlaqwsjt .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="jhzxzggoew" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="epnlaqwsjt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -542,24 +542,1419 @@ track_popularity &lt;- map_df(track_ids, track_popularity)</code></pre>
   
 </table></div>
 <pre class="r"><code>base_tbl &lt;- bad_bunny_compl_track %&gt;% 
-  gt()</code></pre>
+  gt()
+
+base_tbl</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#amchmcform .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#amchmcform .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#amchmcform .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#amchmcform .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#amchmcform .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#amchmcform .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#amchmcform .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#amchmcform .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#amchmcform .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#amchmcform .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#amchmcform .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#amchmcform .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#amchmcform .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#amchmcform .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#amchmcform .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#amchmcform .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#amchmcform .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#amchmcform .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#amchmcform .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amchmcform .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#amchmcform .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amchmcform .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#amchmcform .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#amchmcform .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#amchmcform .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#amchmcform .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#amchmcform .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#amchmcform .gt_left {
+  text-align: left;
+}
+
+#amchmcform .gt_center {
+  text-align: center;
+}
+
+#amchmcform .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#amchmcform .gt_font_normal {
+  font-weight: normal;
+}
+
+#amchmcform .gt_font_bold {
+  font-weight: bold;
+}
+
+#amchmcform .gt_font_italic {
+  font-style: italic;
+}
+
+#amchmcform .gt_super {
+  font-size: 65%;
+}
+
+#amchmcform .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="amchmcform" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">url</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">track_name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">popularity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">danceability</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">valence</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">energy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">track_preview_url</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">LA NOCHE DE ANOCHE</td>
+      <td class="gt_row gt_right">94</td>
+      <td class="gt_row gt_right">0.856</td>
+      <td class="gt_row gt_right">0.391</td>
+      <td class="gt_row gt_right">0.618</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/a98b639351290bdb69b865ad10c2e0f5dbe0c4cd?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">Dakiti</td>
+      <td class="gt_row gt_right">91</td>
+      <td class="gt_row gt_right">0.731</td>
+      <td class="gt_row gt_right">0.145</td>
+      <td class="gt_row gt_right">0.573</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/edd9bea2e66b14169f8bbfa45a78b6599b14160a?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE MUDASTE</td>
+      <td class="gt_row gt_right">91</td>
+      <td class="gt_row gt_right">0.811</td>
+      <td class="gt_row gt_right">0.471</td>
+      <td class="gt_row gt_right">0.637</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/4b2612fb7d969678d72d61908b62b73d592a737e?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HACIENDO QUE ME AMAS</td>
+      <td class="gt_row gt_right">87</td>
+      <td class="gt_row gt_right">0.584</td>
+      <td class="gt_row gt_right">0.412</td>
+      <td class="gt_row gt_right">0.411</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/b9c23099bd993e55aa9ac967477c36e57e2d3a7d?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">YO VISTO ASÍ</td>
+      <td class="gt_row gt_right">87</td>
+      <td class="gt_row gt_right">0.688</td>
+      <td class="gt_row gt_right">0.677</td>
+      <td class="gt_row gt_right">0.881</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/7b32b29728bd3c03d3c21e0540ce549ea24caada?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">BOOKER T</td>
+      <td class="gt_row gt_right">86</td>
+      <td class="gt_row gt_right">0.883</td>
+      <td class="gt_row gt_right">0.691</td>
+      <td class="gt_row gt_right">0.600</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ddf13c4036c5fbc40c48f84cc50e46546e28d03a?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273548f7ec52da7313de0c5e4a0</td>
+      <td class="gt_row gt_left">Safaera</td>
+      <td class="gt_row gt_right">85</td>
+      <td class="gt_row gt_right">0.607</td>
+      <td class="gt_row gt_right">0.685</td>
+      <td class="gt_row gt_right">0.829</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/c67f59e5d3806b41f54f772ba8cc24410ed0a258?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE DESEO LO MEJOR</td>
+      <td class="gt_row gt_right">85</td>
+      <td class="gt_row gt_right">0.763</td>
+      <td class="gt_row gt_right">0.194</td>
+      <td class="gt_row gt_right">0.597</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/5734e3556195f4598b5562d9c8f0630693f51fec?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HOY COBRÉ</td>
+      <td class="gt_row gt_right">84</td>
+      <td class="gt_row gt_right">0.860</td>
+      <td class="gt_row gt_right">0.375</td>
+      <td class="gt_row gt_right">0.725</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ed3eac946a786dc1bfaa89cb1d135428046c119c?cid=9d31a6fe89fc4bbda898cd726a12d593"&gt;&lt;/audio&gt;</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b2734891d9b25d8919448388f3bb</td>
+      <td class="gt_row gt_left">LA CANCION</td>
+      <td class="gt_row gt_right">84</td>
+      <td class="gt_row gt_right">0.754</td>
+      <td class="gt_row gt_right">0.429</td>
+      <td class="gt_row gt_right">0.646</td>
+      <td class="gt_row gt_left">&lt;audio controlsList="nodownload" controls src="NA"&gt;&lt;/audio&gt;</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>As seen above, the table is bare but in the following sections will begin to make edits until we create a wonderful-looking table. Do keep in mind that the components I decide to edit does not cover all the possibility and would encourage you to go check out the packages <a href="https://gt.rstudio.com/reference/index.html">reference package</a>.</p>
 </div>
 <div id="formating-data" class="section level2">
 <h2>Formating Data</h2>
-<p>With the <code>fmt_*()</code> functions, we can modify columns so that they take on a specific appearance/value.</p>
-<pre class="r"><code>formated_tbl &lt;- base_tbl %&gt;% 
-  fmt_markdown(columns = vars(track_preview_url)) %&gt;% 
+<p>With the <code>fmt_*()</code> functions, we can modify columns so that they take on a specific appearance/value. The two we changes are applied to the gt table is to make some columns accept markdown while changing the decimal places for numerical values. Using the <code>fmt_markdown()</code> function while specifying the desired column in the <code>columns</code> argument will allow columns to be rendered in their appreciate output type. As you see in the base table, there is a bunch of HTML tags that unless rendered as HTML will not make sense. Formatting that to column allows for that code to be translated and rendered as is should be, which is a audio tag. The <code>columns = vars()</code> argument is common throughout the <code>{gt}</code> package and is something you will become familiar with. To format columns that contain numerical values, you follow the same syntax as was down with markdown. The added argument is one that ask you to indicate the number of decimal places to use. Your code should look like the following.</p>
+<pre class="r"><code>formatted_tbl &lt;- base_tbl %&gt;% 
+  fmt_markdown(columns = vars(track_preview_url)) %&gt;% #formatting column to markdown
   fmt_number(
-    columns = vars(danceability, energy, valence),
+    columns = vars(danceability, energy, valence), #formatting column numerical value
     decimals = 2
-    )</code></pre>
+    )
+
+formatted_tbl</code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#cfvmlykzic .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cfvmlykzic .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cfvmlykzic .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cfvmlykzic .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cfvmlykzic .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cfvmlykzic .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cfvmlykzic .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cfvmlykzic .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cfvmlykzic .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cfvmlykzic .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cfvmlykzic .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cfvmlykzic .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cfvmlykzic .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cfvmlykzic .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#cfvmlykzic .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvmlykzic .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvmlykzic .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#cfvmlykzic .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvmlykzic .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#cfvmlykzic .gt_left {
+  text-align: left;
+}
+
+#cfvmlykzic .gt_center {
+  text-align: center;
+}
+
+#cfvmlykzic .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cfvmlykzic .gt_font_normal {
+  font-weight: normal;
+}
+
+#cfvmlykzic .gt_font_bold {
+  font-weight: bold;
+}
+
+#cfvmlykzic .gt_font_italic {
+  font-style: italic;
+}
+
+#cfvmlykzic .gt_super {
+  font-size: 65%;
+}
+
+#cfvmlykzic .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="cfvmlykzic" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">url</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">track_name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">popularity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">danceability</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">valence</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">energy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">track_preview_url</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">LA NOCHE DE ANOCHE</td>
+      <td class="gt_row gt_right">94</td>
+      <td class="gt_row gt_right">0.86</td>
+      <td class="gt_row gt_right">0.39</td>
+      <td class="gt_row gt_right">0.62</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/a98b639351290bdb69b865ad10c2e0f5dbe0c4cd?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">Dakiti</td>
+      <td class="gt_row gt_right">91</td>
+      <td class="gt_row gt_right">0.73</td>
+      <td class="gt_row gt_right">0.14</td>
+      <td class="gt_row gt_right">0.57</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/edd9bea2e66b14169f8bbfa45a78b6599b14160a?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE MUDASTE</td>
+      <td class="gt_row gt_right">91</td>
+      <td class="gt_row gt_right">0.81</td>
+      <td class="gt_row gt_right">0.47</td>
+      <td class="gt_row gt_right">0.64</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/4b2612fb7d969678d72d61908b62b73d592a737e?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HACIENDO QUE ME AMAS</td>
+      <td class="gt_row gt_right">87</td>
+      <td class="gt_row gt_right">0.58</td>
+      <td class="gt_row gt_right">0.41</td>
+      <td class="gt_row gt_right">0.41</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/b9c23099bd993e55aa9ac967477c36e57e2d3a7d?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">YO VISTO ASÍ</td>
+      <td class="gt_row gt_right">87</td>
+      <td class="gt_row gt_right">0.69</td>
+      <td class="gt_row gt_right">0.68</td>
+      <td class="gt_row gt_right">0.88</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/7b32b29728bd3c03d3c21e0540ce549ea24caada?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">BOOKER T</td>
+      <td class="gt_row gt_right">86</td>
+      <td class="gt_row gt_right">0.88</td>
+      <td class="gt_row gt_right">0.69</td>
+      <td class="gt_row gt_right">0.60</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ddf13c4036c5fbc40c48f84cc50e46546e28d03a?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273548f7ec52da7313de0c5e4a0</td>
+      <td class="gt_row gt_left">Safaera</td>
+      <td class="gt_row gt_right">85</td>
+      <td class="gt_row gt_right">0.61</td>
+      <td class="gt_row gt_right">0.69</td>
+      <td class="gt_row gt_right">0.83</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/c67f59e5d3806b41f54f772ba8cc24410ed0a258?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE DESEO LO MEJOR</td>
+      <td class="gt_row gt_right">85</td>
+      <td class="gt_row gt_right">0.76</td>
+      <td class="gt_row gt_right">0.19</td>
+      <td class="gt_row gt_right">0.60</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/5734e3556195f4598b5562d9c8f0630693f51fec?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HOY COBRÉ</td>
+      <td class="gt_row gt_right">84</td>
+      <td class="gt_row gt_right">0.86</td>
+      <td class="gt_row gt_right">0.38</td>
+      <td class="gt_row gt_right">0.72</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ed3eac946a786dc1bfaa89cb1d135428046c119c?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b2734891d9b25d8919448388f3bb</td>
+      <td class="gt_row gt_left">LA CANCION</td>
+      <td class="gt_row gt_right">84</td>
+      <td class="gt_row gt_right">0.75</td>
+      <td class="gt_row gt_right">0.43</td>
+      <td class="gt_row gt_right">0.65</td>
+      <td class="gt_row gt_left"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="NA"></audio></p>
+</div></td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
 <div id="modifying-columns" class="section level2">
 <h2>Modifying Columns</h2>
+<p>Modifying columns follows the same logic that was seen with formatting columns. You will have select the columns you want and then pass some arguments to achieve the desired results. In this section we focus adjusting the width and names of columns. Those functions that allow for the modification of entire column start with <code>col_*()</code> followed by the action you want. For use, those will be <code>col_width()</code>, <code>col_label()</code> and <code>col_align()</code>.</p>
+<p>If you have used the <code>rename()</code> from the from the <code>{dplyr}</code> package or <code>recode()</code> from base R, then the format for using <code>col_width()</code> should look familiar. Essentially you select the desired columns and using the tilde(~) as a separator you then provide the unit length which is in pixel format. You should end up with two a two-sided formula that <code>selects desired columns ~ sets desired length of said columns</code>.</p>
+<p>To change the name of each column, you use the <code>col_label()</code> function. It is ‘important to note that while columns can be freely relabeled, we continue to refer to the columns by their original column names’. With that in mind, everything to the left of the equal sign should refer to the selected column by name while the right side is the new label of the aforementioned column like so <code>current name = new name</code>. While also relabeling columns, you can allow the option to accept <code>md()</code> and <code>html()</code> helper functions, so that you can add cool things like emojis^[You can search for the hex or decimal code on Google!!</p>
+<p>The last modification we do is aligning our columns so that the <strong>column labels and values</strong> are center aligned. First you select your desired (<em>remember that argument</em>) columns followed by choosing what type of alignment you want. There are four alignment types: left, center, right and auto, which is default. You can mix alignments as with most things in the <code>{gt}</code> package.</p>
+<pre class="r"><code>modified_cols &lt;- formatted_tbl %&gt;% 
+  cols_width(
+    vars(url) ~ px(150),   # Changing the width of the url column
+    vars(track_name) ~ px(200),
+    vars(popularity, danceability, valence, energy) ~ px(100),
+    vars(track_preview_url) ~ px(300)
+  ) %&gt;% 
+  cols_label(
+    url = &quot; &quot;,
+    track_name = md(&quot;Track Name &amp;#128192;&quot;), # Relabeling the column while formatting to accept markdown
+    popularity = &quot;Popularity&quot;,  # Relabeling the column
+    danceability = &quot;Danceability&quot;,
+    valence = &quot;Valence&quot;,
+    energy = &quot;Energy&quot;,
+    track_preview_url = md(&quot;&amp;#127911; Let&#39;s Take Listen &amp;#127911;&quot;)
+  ) %&gt;% 
+  cols_align(
+    vars(popularity, danceability, valence, energy, track_preview_url), # Center aligning these columns
+    align = &#39;center&#39;
+  )
+  
+modified_cols </code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#fkyicxvydl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fkyicxvydl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fkyicxvydl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fkyicxvydl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fkyicxvydl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fkyicxvydl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fkyicxvydl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fkyicxvydl .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fkyicxvydl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fkyicxvydl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fkyicxvydl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fkyicxvydl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fkyicxvydl .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fkyicxvydl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#fkyicxvydl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fkyicxvydl .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fkyicxvydl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#fkyicxvydl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fkyicxvydl .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#fkyicxvydl .gt_left {
+  text-align: left;
+}
+
+#fkyicxvydl .gt_center {
+  text-align: center;
+}
+
+#fkyicxvydl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fkyicxvydl .gt_font_normal {
+  font-weight: normal;
+}
+
+#fkyicxvydl .gt_font_bold {
+  font-weight: bold;
+}
+
+#fkyicxvydl .gt_font_italic {
+  font-style: italic;
+}
+
+#fkyicxvydl .gt_super {
+  font-size: 65%;
+}
+
+#fkyicxvydl .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="fkyicxvydl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table" style="table-layout: fixed; width: 1050px">
+  <colgroup>
+    <col style="width: 150px"/>
+    <col style="width: 200px"/>
+    <col style="width: 100px"/>
+    <col style="width: 100px"/>
+    <col style="width: 100px"/>
+    <col style="width: 100px"/>
+    <col style="width: 300px"/>
+  </colgroup>
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Track Name 📀</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Popularity</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Danceability</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Valence</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Energy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">🎧 Let's Take Listen 🎧</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">LA NOCHE DE ANOCHE</td>
+      <td class="gt_row gt_center">94</td>
+      <td class="gt_row gt_center">0.86</td>
+      <td class="gt_row gt_center">0.39</td>
+      <td class="gt_row gt_center">0.62</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/a98b639351290bdb69b865ad10c2e0f5dbe0c4cd?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">Dakiti</td>
+      <td class="gt_row gt_center">91</td>
+      <td class="gt_row gt_center">0.73</td>
+      <td class="gt_row gt_center">0.14</td>
+      <td class="gt_row gt_center">0.57</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/edd9bea2e66b14169f8bbfa45a78b6599b14160a?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE MUDASTE</td>
+      <td class="gt_row gt_center">91</td>
+      <td class="gt_row gt_center">0.81</td>
+      <td class="gt_row gt_center">0.47</td>
+      <td class="gt_row gt_center">0.64</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/4b2612fb7d969678d72d61908b62b73d592a737e?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HACIENDO QUE ME AMAS</td>
+      <td class="gt_row gt_center">87</td>
+      <td class="gt_row gt_center">0.58</td>
+      <td class="gt_row gt_center">0.41</td>
+      <td class="gt_row gt_center">0.41</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/b9c23099bd993e55aa9ac967477c36e57e2d3a7d?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">YO VISTO ASÍ</td>
+      <td class="gt_row gt_center">87</td>
+      <td class="gt_row gt_center">0.69</td>
+      <td class="gt_row gt_center">0.68</td>
+      <td class="gt_row gt_center">0.88</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/7b32b29728bd3c03d3c21e0540ce549ea24caada?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">BOOKER T</td>
+      <td class="gt_row gt_center">86</td>
+      <td class="gt_row gt_center">0.88</td>
+      <td class="gt_row gt_center">0.69</td>
+      <td class="gt_row gt_center">0.60</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ddf13c4036c5fbc40c48f84cc50e46546e28d03a?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273548f7ec52da7313de0c5e4a0</td>
+      <td class="gt_row gt_left">Safaera</td>
+      <td class="gt_row gt_center">85</td>
+      <td class="gt_row gt_center">0.61</td>
+      <td class="gt_row gt_center">0.69</td>
+      <td class="gt_row gt_center">0.83</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/c67f59e5d3806b41f54f772ba8cc24410ed0a258?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">TE DESEO LO MEJOR</td>
+      <td class="gt_row gt_center">85</td>
+      <td class="gt_row gt_center">0.76</td>
+      <td class="gt_row gt_center">0.19</td>
+      <td class="gt_row gt_center">0.60</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/5734e3556195f4598b5562d9c8f0630693f51fec?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b273005ee342f4eef2cc6e8436ab</td>
+      <td class="gt_row gt_left">HOY COBRÉ</td>
+      <td class="gt_row gt_center">84</td>
+      <td class="gt_row gt_center">0.86</td>
+      <td class="gt_row gt_center">0.38</td>
+      <td class="gt_row gt_center">0.72</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="https://p.scdn.co/mp3-preview/ed3eac946a786dc1bfaa89cb1d135428046c119c?cid=9d31a6fe89fc4bbda898cd726a12d593"></audio></p>
+</div></td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">https://i.scdn.co/image/ab67616d0000b2734891d9b25d8919448388f3bb</td>
+      <td class="gt_row gt_left">LA CANCION</td>
+      <td class="gt_row gt_center">84</td>
+      <td class="gt_row gt_center">0.75</td>
+      <td class="gt_row gt_center">0.43</td>
+      <td class="gt_row gt_center">0.65</td>
+      <td class="gt_row gt_center"><div class='gt_from_md'><p><audio controlsList="nodownload" controls src="NA"></audio></p>
+</div></td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
-<div id="styling" class="section level2">
-<h2>Styling</h2>
+<div id="editing-table-parts" class="section level2">
+<h2>Editing Table Parts</h2>
+<div id="footnotes" class="section level3">
+<h3>Footnotes</h3>
+<p>When it comes to creating table footnotes, it can be both easy and complex at the same time depending on where you would like place footnotes. You can have a footnote that is general or one that specifically targets a value within a cell. For this post, we focus more on the general side of footnoting. The <code>tab_footnote()</code> function will allow you to add footnotes, regardless of the level of complexity.</p>
+</div>
+<div id="style" class="section level3">
+<h3>Style</h3>
+</div>
+</div>
+<div id="labeling" class="section level2">
+<h2>Labeling</h2>
 </div>
 <div id="font" class="section level2">
 <h2>Font</h2>

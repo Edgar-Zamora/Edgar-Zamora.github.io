@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>The Complete Theme Guide</title>
-      <link>/2020/04/02/complete-theme-guide/</link>
-      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/02/complete-theme-guide/</guid>
-      <description>In creating visualizations, one aims not only to create a visualization that can convey the message behind the data but also to create a visualization that is appealing to the viewer. The theme function in ggplot allows for one to do so, but whenever I look at the reference page I sometimes become over whelmed by the number of components. For that reason, this post will focus on detailing non-data components of ones plot.</description>
-    </item>
-    
-    <item>
       <title>Generating multiple ggplot plots using purrr</title>
       <link>/2020/02/20/generating-multipier-ggplot-using-purrr/</link>
       <pubDate>Thu, 20 Feb 2020 00:00:00 +0000</pubDate>
